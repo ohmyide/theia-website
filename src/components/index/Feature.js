@@ -15,6 +15,7 @@
  ********************************************************************************/
 
 import React from 'react'
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 import styled from '@emotion/styled'
 import { breakpoints } from '../../utils/variables'
@@ -49,17 +50,19 @@ const StyledFeature = styled.div`
         height: 7rem;
     }
 `
-
-const Feature = ({ img, title, paragraphs }) => (
-    <StyledFeature className="feature">
-        <div>
-            {img}
-            <h3 className="heading-tertiary">{title}</h3>
-        </div>
-        {
-            paragraphs.map((p, i) => <p key={`${i}${title}`}>{p}</p>)
-        }
-    </StyledFeature>
-)
+const Feature = ({ img, title, paragraphs }) => {
+    const {t} = useTranslation();
+    return (
+        <StyledFeature className="feature">
+            <div>
+                {img}
+                <h3 className="heading-tertiary">{t(`${title}`,{title})}</h3>
+            </div>
+            {
+                paragraphs.map((p, i) => <p key={`${i}${title}`}>{t(`${p}`,{p})}</p>)
+            }
+        </StyledFeature>
+    )
+}
 
 export default Feature

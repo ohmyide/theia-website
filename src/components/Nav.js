@@ -15,12 +15,14 @@
  ********************************************************************************/
 
 import React from 'react'
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 import { Link } from 'gatsby'
 import styled from '@emotion/styled'
 import { breakpoints, colors } from '../utils/variables'
 import Hamburger from '../resources/hamburger.svg'
 import Multiply from '../resources/multiply.svg'
 import TheiaLogoDark from '../resources/theia-logo-dark.svg'
+
 
 const StyledNav = styled.div`
     @media(max-width: ${breakpoints.xmd}) {
@@ -206,7 +208,10 @@ class Nav extends React.Component {
     }
 
     render() {
-        const { shouldRenderLogo } = this.props
+        const { shouldRenderLogo } = this.props;
+        const {t} = useTranslation();
+
+        // console.log('------------t:',t);
         return (
             <StyledNav>
                 <nav className="nav" style={ this.state.isNavRendered ? { background: '#fff', height: '100vh' } : {} }>
@@ -228,22 +233,22 @@ class Nav extends React.Component {
                     </div>
                     <ul className={`nav__items ${this.state.isNavRendered ? 'navIsRendered' : 'navIsNotRendered' }`}>
                         <li className="nav__item">
-                            <Link to="/#features" className="nav__link">Features</Link>
+                            <Link to="/#features" className="nav__link">{t("Features")}</Link>
                         </li>
                         <li className="nav__item">
-                            <Link to="/docs/" className="nav__link" activeClassName="active">Documentation</Link>
+                            <Link to="/docs/" className="nav__link" activeClassName="active">{t("Documentation")}</Link>
                         </li>
                         <li className="nav__item">
-                            <a href="https://community.theia-ide.org/" target="_blank" rel="noopener" className="nav__link">Community</a>
+                            <a href="https://community.theia-ide.org/" target="_blank" rel="noopener" className="nav__link">{t("Community")}</a>
                         </li>
                         <li className="nav__item">
-                            <Link to="/support/" className="nav__link">Support</Link>
+                            <Link to="/support/" className="nav__link">{t("Support")}</Link>
                         </li>
                         <li className="nav__item nav__dropdown">
-                            Resources <b className="caret"></b>
+                            {t("Resources")} <b className="caret"></b>
                             <ul className="dropdown-menu">
-                                <li><Link to="/blogs/" className="nav__link">Blogs</Link></li>
-                                <li><Link to="/resources/" className="nav__link">Other Resources</Link></li>
+                                <li><Link to="/blogs/" className="nav__link">{t("Blogs")}</Link></li>
+                                <li><Link to="/resources/" className="nav__link">{t("Other Resources")}</Link></li>
                             </ul>
                         </li>
                     </ul>

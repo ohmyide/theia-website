@@ -13,9 +13,8 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-
 import React from 'react'
-
+import {useTranslation} from 'gatsby-plugin-react-i18next';
 import Layout from '../layouts/layout'
 import Error404 from '../resources/404-error.svg'
 import Background from '../resources/background-image.png'
@@ -23,7 +22,7 @@ import Footer from '../components/Footer'
 import styled from '@emotion/styled'
 import { breakpoints } from '../utils/variables'
 import Nav from '../components/Nav'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 
 const StyledNotFoundPage = styled.div`
     background-image: url(${Background});
@@ -64,23 +63,40 @@ const StyledNotFoundPage = styled.div`
 
 `
 
-const NotFoundPage = () => (
-    <Layout>
-        <StyledNotFoundPage>
-                <div className="row">
-                    <Nav shouldRenderLogo={true}/>
-                    <main>
-                        <div>
-                            <img src={Error404} alt="404"/>
-                            <h1>Oops!</h1>
-                            <p>We can't find the page you're looking for</p>
-                            <Link to="/" className="btn">Back to Home &nbsp;&rarr;</Link>
-                        </div>
-                    </main> 
-                </div>
-        </StyledNotFoundPage>
-        <Footer />
-    </Layout>
-)
+const NotFoundPage = () => {
+    const {t} = useTranslation();
+    return (
+        <Layout>
+            <StyledNotFoundPage>
+                    <div className="row">
+                        <Nav shouldRenderLogo={true}/>
+                        <main>
+                            <div>
+                                <img src={Error404} alt="404"/>
+                                <h1>{t("Oops")}!</h1>
+                                <p>{t("We can't find the page you're looking for")}</p>
+                                <Link to="/" className="btn">{t("Back to Home")} &nbsp;&rarr;</Link>
+                            </div>
+                        </main>
+                    </div>
+            </StyledNotFoundPage>
+            <Footer />
+        </Layout>
+    )
+}
 
 export default NotFoundPage
+
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(filter: {language: {eq: $language}}) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;

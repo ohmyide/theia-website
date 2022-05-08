@@ -13,9 +13,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-
+ import { useTranslation } from 'gatsby-plugin-react-i18next';
 import Background from '../../resources/background-image.png'
-import DocImage from '../DocImage'
+// import DocImage from '../DocImage'
 import Nav from '../Nav'
 import React from 'react'
 import TheiaLogoDark from '../../resources/theia-logo-dark.svg'
@@ -81,35 +81,37 @@ const StyledHeader = styled.div`
         }
     }
 `
-
-const Header = () => (
-    <StyledHeader>
-        <header className='header' role="banner">
-            <div className="row">
-                <Nav shouldRenderLogo={true} />
-                <div className="header__github-details">
-                    <iframe title="Github Star Count" className="header__github-button" src="https://ghbtns.com/github-btn.html?user=eclipse-theia&repo=theia&type=star&count=true" frameBorder={0} scrolling={0} />
-                    <iframe title="Github Fork Count" className="header__github-button" src="https://ghbtns.com/github-btn.html?user=eclipse-theia&repo=theia&type=fork&count=true" frameBorder={0} scrolling={0} />
-                </div>
-                <div className="header__text-box">
-                    <h1 className="heading-primary">
-                    An Open, Flexible and Extensible Cloud & Desktop IDE Platform
-                    </h1>
-                    <h2 style={{ fontSize: '2.1rem' }}>
-                        Efficiently develop and deliver Cloud & Desktop IDEs and tools with modern web technologies.
-                        <br/>
-                        <a href="https://eclipsesource.com/blogs/2022/03/01/eclipse-theia-1-23-release-news-and-noteworthy/" rel="noopener noreferrer">Learn about the latest 1.23 Release!</a>
-                        <br/>
-                        Stay up-to-date: <a href="https://twitter.com/theia_ide">follow us on Twitter</a> and <a href="https://accounts.eclipse.org/mailing-list/friends-of-theia">register to the "Friends of Theia" mailing list</a>.
-                    </h2>
-                    <div className="header__buttons">
-                        <a className="btn" href="https://github.com/eclipse-theia/theia" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-                        <a className="btn btn--cta" href="/docs/blueprint_download/" rel="noopener">Try now &nbsp;&nbsp;&rarr;</a>
+const Header = () => {
+    const {t} = useTranslation();
+    return (
+        <StyledHeader>
+            <header className='header' role="banner">
+                <div className="row">
+                    <Nav shouldRenderLogo={true} t={t}/>
+                    <div className="header__github-details">
+                        <iframe title="Github Star Count" className="header__github-button" src="https://ghbtns.com/github-btn.html?user=eclipse-theia&repo=theia&type=star&count=true" frameBorder={0} scrolling={0} />
+                        <iframe title="Github Fork Count" className="header__github-button" src="https://ghbtns.com/github-btn.html?user=eclipse-theia&repo=theia&type=fork&count=true" frameBorder={0} scrolling={0} />
+                    </div>
+                    <div className="header__text-box">
+                        <h1 className="heading-primary">
+                        {t("An Open, Flexible and Extensible Cloud & Desktop IDE Platform")}
+                        </h1>
+                        <h2 style={{ fontSize: '2.1rem' }}>
+                            {t("Efficiently develop and deliver Cloud & Desktop IDEs and tools with modern web technologies.")}
+                            <br/>
+                            <a href="https://eclipsesource.com/blogs/2022/03/01/eclipse-theia-1-23-release-news-and-noteworthy/" rel="noopener noreferrer">Learn about the latest 1.23 Release!</a>
+                            <br/>
+                            {t("Stay up-to-date:")} <a href="https://twitter.com/theia_ide">{t("follow us on Twitter")}</a> {t("and")} <a href="https://accounts.eclipse.org/mailing-list/friends-of-theia">{t(`register to the "Friends of Theia" mailing list.`)}</a>
+                        </h2>
+                        <div className="header__buttons">
+                            <a className="btn" href="https://github.com/eclipse-theia/theia" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                            <a className="btn btn--cta" href="/docs/blueprint_download/" rel="noopener">Try now &nbsp;&nbsp;&rarr;</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
-    </StyledHeader>
-)
+            </header>
+        </StyledHeader>
+    )
+}
 
 export default Header

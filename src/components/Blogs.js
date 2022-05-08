@@ -16,7 +16,8 @@
 
 import Nav from './Nav'
 import React, { useState, useEffect } from 'react'
-import Parser from 'rss-parser'
+// import Parser from 'rss-parser'
+// require('../../node_modules/rss-parser/dist/rss-parser.js')
 import { breakpoints } from '../utils/variables'
 import styled from '@emotion/styled'
 import Background from '../resources/background-image.png'
@@ -94,21 +95,21 @@ const Blogs = () => {
         fetch('https://planeteclipse.org/planet/ecdtools.xml')
             .then(response => response.text())
             .then(str => {
-                let parser = new Parser({
-                    customFields: {
-                        item: [
-                          ['category', 'categories', {keepArray: true}],
-                        ]
-                    }
-                });
-                parser.parseString(str, (err,feed) => {
-                    if (err) throw err;
-                    const regex = /theia/gi;
-                    feed.items = feed.items.filter(item => {
-                        return item.categories.some(cat => regex.test(cat.$.term));
-                    })
-                    setFeed(feed);
-                })
+                // let parser = new Parser({
+                //     customFields: {
+                //         item: [
+                //           ['category', 'categories', {keepArray: true}],
+                //         ]
+                //     }
+                // });
+                // parser.parseString(str, (err,feed) => {
+                //     if (err) throw err;
+                //     const regex = /theia/gi;
+                //     feed.items = feed.items.filter(item => {
+                //         return item.categories.some(cat => regex.test(cat.$.term));
+                //     })
+                //     setFeed(feed);
+                // })
             });
     }, []);
 

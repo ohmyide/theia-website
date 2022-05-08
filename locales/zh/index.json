@@ -1,0 +1,23 @@
+{
+    "An Open, Flexible and Extensible Cloud & Desktop IDE Platform": "开源、灵活、可扩展的云端 & 桌面 IDE 平台",
+    "Efficiently develop and deliver Cloud & Desktop IDEs and tools with modern web technologies.": "使用现代 Web 技术，高效开发和交付的云端 & 桌面 IDE 工具链。",
+    "Stay up-to-date:": "保持关注：",
+    "follow us on Twitter": "官方推特",
+    "and": "以及",
+    "register to the \"Friends of Theia\" mailing list.": "注册 “Theia和他的朋友们” 邮件列表。",
+    "Selected Tools based on Eclipse Theia": "使用 Eclipse Theia 构建的优秀案例",
+    "Features": "功能",
+    "Documentation": "文档",
+    "Community": "社区",
+    "Support": "技术支持",
+    "Resources": "资源",
+    "Blogs": "博客",
+    "Other Resources": "其他资源",
+    "Cloud & Desktop": "云端 & 桌面端",
+    "Not sure whether you need a web or desktop version or both?": "不确定自己需要网页版还是桌面版？或者两者都要？",
+    "With Theia you can develop one IDE and run it in a browser or as a native desktop application from a single source.": "用 Theia 可以用一套代码产出浏览器和桌面两套 IDE。",
+    "Extensible": "可扩展",
+    "Theia is designed in a modular way to allow extenders and adopters to customize and extend every aspect.": "Theia 采用模块化设计思路，各功能方向均支持自定义适配和扩展。",
+    "This goes way beyond “just adding extensions”, because Eclipse Theia lets you build fully customized or white-labeled products!": "这不仅仅是“增加扩展而已”，因为 Eclipse Theia 能让你构建出完全定制甚至属于自己品牌的产品！",
+    "Vendor Neutral": "厂商中立"
+}

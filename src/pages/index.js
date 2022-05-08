@@ -13,9 +13,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-
- import React from 'react'
-
+import { graphql } from 'gatsby'
+import React from 'react'
+import {useTranslation} from 'gatsby-plugin-react-i18next';
 import Layout from '../layouts/layout'
 import Header from '../components/index/Header'
 import Features from '../components/index/Features'
@@ -28,6 +28,7 @@ import IntrosToTheia from '../components/index/IntrosToTheia'
 
 
 export default () => {
+    const {t} = useTranslation();
     return (
         <Layout canonical='/'>
             <Header />
@@ -43,3 +44,16 @@ export default () => {
         </Layout>
     )
 }
+export const query = graphql`
+  query ($language: String!) {
+    locales: allLocale(filter: {language: {eq: $language}}) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;

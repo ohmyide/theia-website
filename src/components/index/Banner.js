@@ -15,6 +15,7 @@
  ********************************************************************************/
 
 import React from 'react'
+import {useTranslation} from 'gatsby-plugin-react-i18next';
 
 import styled from '@emotion/styled'
 import { breakpoints } from '../../utils/variables'
@@ -78,25 +79,28 @@ const StyledBanner = styled.div`
     }
 `
 
-const Banner = () => (
-    <StyledBanner>
-        <section className="row banner">
-            <div>
-                <img src={TheiaLogoEdited} alt="Theia Logo" />
-            </div>
-            <div>
-                <h3 className="heading-tertiary">Theia versus VS Code</h3>
-                <p>We believe <strong>VS Code is an excellent product</strong>. That is why Theia embraces many of the design decisions and even directly supports VS Code extensions.</p>
-                <div style={{ width: '100%', margin: '2rem 0', maxWidth: 'auto' }}>The most significant differences are:
-                                <ul>
-                        <li><strong>Theia's architecture is more modular</strong> and allows for way more customizations,</li>
-                        <li>Theia is <strong>designed from the ground to run on Desktop and Cloud</strong>, and</li>
-                        <li>Theia is developed under a <strong>vendor-neutral Open-Source Foundation</strong>.</li>
-                    </ul>
+const Banner = () => {
+    const {t} = useTranslation();
+    return (
+        <StyledBanner>
+            <section className="row banner">
+                <div>
+                    <img src={TheiaLogoEdited} alt="Theia Logo" />
                 </div>
-            </div>
-        </section>
-    </StyledBanner>
-)
+                <div>
+                    <h3 className="heading-tertiary">Theia versus VS Code</h3>
+                    <p>We believe <strong>VS Code is an excellent product</strong>. That is why Theia embraces many of the design decisions and even directly supports VS Code extensions.</p>
+                    <div style={{ width: '100%', margin: '2rem 0', maxWidth: 'auto' }}>The most significant differences are:
+                                    <ul>
+                            <li><strong>Theia's architecture is more modular</strong> and allows for way more customizations,</li>
+                            <li>Theia is <strong>designed from the ground to run on Desktop and Cloud</strong>, and</li>
+                            <li>Theia is developed under a <strong>vendor-neutral Open-Source Foundation</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </StyledBanner>
+    )
+}
 
 export default Banner

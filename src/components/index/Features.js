@@ -15,6 +15,7 @@
  ********************************************************************************/
 
 import React from 'react'
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 import styled from '@emotion/styled'
 import { breakpoints } from '../../utils/variables'
@@ -49,10 +50,7 @@ const features = [
     {
         img: <img src={IconExtension} alt="Icon Extension" />,
         title: "Extensible",
-        paragraphs: ['Theia is designed in a modular way to allow extenders and adopters to customize and extend every aspect.', 
-        <>
-            This goes way beyond “just adding extensions”, because Eclipse Theia  lets you build fully customized or white-labeled products!
-        </>]
+        paragraphs: ['Theia is designed in a modular way to allow extenders and adopters to customize and extend every aspect.', 'This goes way beyond “just adding extensions”, because Eclipse Theia lets you build fully customized or white-labeled products!']
     },
     {
         img: <img src={IconOpenSource} alt="Vendor Neutral Open Source" />,
@@ -69,16 +67,19 @@ const features = [
     }
 ]
 
-const Features = () => (
-    <StyledFeatures>
-        <section className="features" id="features">
-            <div className="row feature__container">
-                {features.map(
-                    (feature, i) => <Feature key={`${i}+${feature.title}`} {...feature} />
-                )}
-            </div>
-        </section>
-    </StyledFeatures>
-)
+const Features = () => {
+    const {t} = useTranslation();
+    return (
+        <StyledFeatures>
+            <section className="features" id="features">
+                <div className="row feature__container">
+                    {features.map(
+                        (feature, i) => <Feature key={`${i}+${feature.title}`} {...feature} />
+                    )}
+                </div>
+            </section>
+        </StyledFeatures>
+    )
+}
 
 export default Features
