@@ -93,18 +93,18 @@ const Header = () => (
                 </div>
                 <div className="header__text-box">
                     <h1 className="heading-primary">
-                    An Open, Flexible and Extensible Cloud & Desktop IDE Platform
+                    开源、灵活、可扩展的云端 & 桌面端 IDE 平台
                     </h1>
                     <h2 style={{ fontSize: '2.1rem' }}>
-                        Efficiently develop and deliver Cloud & Desktop IDEs and tools with modern web technologies.
+                    使用现代 Web 技术，高效开发和交付的云端 & 桌面 IDE 工具链。
                         <br/>
-                        <a href="https://eclipsesource.com/blogs/2022/03/01/eclipse-theia-1-23-release-news-and-noteworthy/" rel="noopener noreferrer">Learn about the latest 1.23 Release!</a>
+                        <a href="https://eclipsesource.com/blogs/2022/03/01/eclipse-theia-1-23-release-news-and-noteworthy/" rel="noopener noreferrer">了解最新 1.23 版本!</a>
                         <br/>
-                        Stay up-to-date: <a href="https://twitter.com/theia_ide">follow us on Twitter</a> and <a href="https://accounts.eclipse.org/mailing-list/friends-of-theia">register to the "Friends of Theia" mailing list</a>.
+                        保持关注： <a href="https://twitter.com/theia_ide">官方推特</a> 并 <a href="https://accounts.eclipse.org/mailing-list/friends-of-theia">注册 “Theia和他的朋友们” 邮件列表</a>。
                     </h2>
                     <div className="header__buttons">
-                        <a className="btn" href="https://github.com/eclipse-theia/theia" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-                        <a className="btn btn--cta" href="/docs/blueprint_download/" rel="noopener">Try now &nbsp;&nbsp;&rarr;</a>
+                        <a className="btn" href="https://github.com/eclipse-theia/theia" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a className="btn btn--cta" href="/docs/blueprint_download/" rel="noopener">快速开始 &nbsp;&nbsp;&rarr;</a>
                     </div>
                 </div>
             </div>

@@ -56,7 +56,7 @@ const StyledFooter = styled.div`
 const Footer = ({background}) => (
     <StyledFooter>
         <footer className="footer" role="contentinfo" style={{background: background ? `url(${Background})` : null}}>
-            <p>Join the community!</p>
+            <p>欢迎加入社区！</p>
             <div className="footer__icons">
                 <a href="https://twitter.com/theia_ide" target="_blank" rel="noopener noreferrer" className="footer__link">
                     <img src={TwitterLogo} alt="Twitter Logo" className="footer__icon" />
@@ -68,8 +68,11 @@ const Footer = ({background}) => (
                     <img src={DiscourseLogo} alt="Discourse Logo" className="footer__icon" style={{height: '3.2rem'}}/>
                 </a>
             </div>
-            <p className="footer__copyright"><a target="_blank" rel="noopener noreferrer" href="https://projects.eclipse.org/projects/ecd.theia/">About</a> | <a target="_blank" rel="noopener noreferrer" href=" http://www.eclipse.org/legal/privacy.php">Privacy Policy</a> | <a target="_blank" rel="noopener noreferrer" href=" http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a> | <a target="_blank" rel="noopener noreferrer" href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></p>
-            <p>© {(new Date()).getFullYear()} by <a href="https://www.eclipse.org/org/" target="_blank" rel="noopener">Eclipse Foundation</a></p>
+            <p className="footer__copyright"><a target="_blank" rel="noopener noreferrer" href="https://projects.eclipse.org/projects/ecd.theia/">关于</a>
+             | <a target="_blank" rel="noopener noreferrer" href=" http://www.eclipse.org/legal/privacy.php">隐私条款</a>
+              | <a target="_blank" rel="noopener noreferrer" href=" http://www.eclipse.org/legal/termsofuse.php">使用条款</a>
+               | <a target="_blank" rel="noopener noreferrer" href="http://www.eclipse.org/legal/copyright.php">版权代理</a></p>
+            <p>© {(new Date()).getFullYear()} by <a href="https://www.eclipse.org/org/" target="_blank" rel="noopener">Eclipse 基金会</a></p>
         </footer>
     </StyledFooter>
 )

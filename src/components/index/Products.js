@@ -83,7 +83,7 @@ const Products = () => (
     <div className="row">
         <Styled>
             <section className="products" >
-                <h3 className="heading-tertiary">Selected Tools based on Eclipse Theia</h3>
+                <h3 className="heading-tertiary">使用 Eclipse Theia 构建的优秀案例</h3>
                 <div className="swiper-button-prev"></div>
                 <Swiper
                     modules={[Navigation]}

@@ -133,10 +133,10 @@ const Support = () => (
                 <Nav shouldRenderLogo={true} />
                 <div className="header__text-box">
                     <h1 className="heading-primary">
-                    Professional Support
+                    技术支持
                     </h1>
                     <h2 style={{ fontSize: '2.2rem' }}>
-                    The following contributing companies provide professional support and training for Eclipse Theia:
+                    下述公司为 Eclipse Theia 提供了专业的支持和培训：
                     </h2>
                 </div>
             </div>
@@ -150,9 +150,9 @@ const Support = () => (
                             <div key={`${i}_${title}`} className="supporter">
                                 <div>
                                     <a href={link}><img src={img} alt={`${title} Logo`} /></a>
-                                    <h3 className="heading-tertiary"><a href={support}>Support</a></h3>
-                                    <h3 className="heading-tertiary"><a href={training}>Training</a></h3>
-                                    {(sponsored) && <h3 className="heading-tertiary"><a href={sponsored}>Sponsored Development</a></h3>}
+                                    <h3 className="heading-tertiary"><a href={support}>支持</a></h3>
+                                    <h3 className="heading-tertiary"><a href={training}>培训</a></h3>
+                                    {(sponsored) && <h3 className="heading-tertiary"><a href={sponsored}>赞助开发</a></h3>}
                                 </div>
                             </div>)
                         }

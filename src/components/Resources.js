@@ -77,7 +77,7 @@ heading-primary {
 
 const categories = [
     {
-        title: 'Release announcements',
+        title: '发版公告',
         resources: [
             {
                 title: 'Eclipse Theia 1.24 Release: News and Noteworthy',
@@ -102,7 +102,7 @@ const categories = [
         ]
     },
     {
-        title: 'Introductions to Eclipse Theia',
+        title: '介绍 Eclipse Theia',
         resources: [
             {
                 title: 'Why Eclipse Theia',
@@ -157,7 +157,7 @@ const categories = [
         ]
     },
     {
-        title: 'Eclipse Theia Adopter Stories',
+        title: 'Eclipse Theia 使用方案例',
         resources: [
             {
                 title: 'Theia Adopter Story: The new Arduino IDE 2.0',
@@ -177,7 +177,7 @@ const categories = [
         ]
     },
     {
-        title: 'Technical topics about Eclipse Theia',
+        title: 'Eclipse Theia 技术专题',
         resources: [
             {
                 title: 'VS Code extensions vs. Theia extensions',
@@ -202,7 +202,7 @@ const categories = [
         ]
     },
     {
-        title: 'Topics related to Eclipse Theia',
+        title: 'Eclipse Theia 其他相关专题',
         resources: [
             {
                 title: 'Eclipse Theia compared to VS Code',
@@ -240,7 +240,7 @@ const Resources = () => (
                 <Nav shouldRenderLogo={true} />
                 <div className="header__text-box">
                     <h1 className="heading-primary">
-                        Other resources
+                        其他资源
                     </h1>
                 </div>
             </div>

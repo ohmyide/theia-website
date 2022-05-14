@@ -43,29 +43,29 @@ const StyledFeatures = styled.div`
 const features = [
     {
         img: <img src={IconCloudScreen} alt="Cloud Screen" />,
-        title: "Cloud & Desktop",
-        paragraphs: ['Not sure whether you need a web or desktop version or both?', 'With Theia you can develop one IDE and run it in a browser or as a native desktop application from a single source.']
+        title: "云端 & 桌面端",
+        paragraphs: ['纠结自己需要网页版还是桌面版？或者两者都要？','用 Theia 可以用一套代码产出浏览器和桌面两套 IDE。']
     },
     {
         img: <img src={IconExtension} alt="Icon Extension" />,
-        title: "Extensible",
-        paragraphs: ['Theia is designed in a modular way to allow extenders and adopters to customize and extend every aspect.', 
+        title: "可扩展",
+        paragraphs: ['Theia 采用模块化设计思路，各功能方向均支持自定义适配和扩展。', 
         <>
-            This goes way beyond “just adding extensions”, because Eclipse Theia  lets you build fully customized or white-labeled products!
+            这不仅仅是“增加扩展而已”，因为 Eclipse Theia 能让你构建出完全定制甚至属于自己品牌的产品！
         </>]
     },
     {
         img: <img src={IconOpenSource} alt="Vendor Neutral Open Source" />,
-        title: "Vendor Neutral",
+        title: "厂商中立",
         paragraphs: [ <>
-            Theia is truly vendor-neutral and developed by a diverse community. Unlike other “open source” projects, Theia is actually hosted at an Open-Source Foundation, protecting it against single-vendor decisions that are against the interest of the community.
-            Learn more <a href="https://www.eclipse.org/projects/dev_process/">here</a>.
+            Theia 是真正的意义上的厂商中立，自身由多元化的技术社区开发。 与其他“开源”项目不同，Theia 托管在专门的开源基金会，从而免受单一供厂商的利益决策影响。
+            想了解更多 <a href="https://www.eclipse.org/projects/dev_process/">请点击这里</a>。
         </>]
     },
     {
         img: <img src={Html} alt="Modern Tech" />,
-        title: "Modern Tech",
-        paragraphs: ['Theia is based on a state-of-the-art web-based  technology stack. It provides language support via LSP and DAP. Further, it can host VS Code extensions and provides full terminal access.']
+        title: "技术前沿",
+        paragraphs: ['Theia 基于最先进的 Web 的技术。 通过 LSP 和 DAP 提供语言支持。 此外，它还支持 VS Code 插件并提供完整的终端访问能力。']
     }
 ]
 

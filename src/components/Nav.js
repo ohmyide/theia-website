@@ -228,22 +228,22 @@ class Nav extends React.Component {
                     </div>
                     <ul className={`nav__items ${this.state.isNavRendered ? 'navIsRendered' : 'navIsNotRendered' }`}>
                         <li className="nav__item">
-                            <Link to="/#features" className="nav__link">Features</Link>
+                            <Link to="/#features" className="nav__link">功能</Link>
                         </li>
                         <li className="nav__item">
-                            <Link to="/docs/" className="nav__link" activeClassName="active">Documentation</Link>
+                            <Link to="/docs/" className="nav__link" activeClassName="active">文档</Link>
                         </li>
                         <li className="nav__item">
-                            <a href="https://community.theia-ide.org/" target="_blank" rel="noopener" className="nav__link">Community</a>
+                            <a href="https://community.theia-ide.org/" target="_blank" rel="noopener" className="nav__link">社区</a>
                         </li>
                         <li className="nav__item">
-                            <Link to="/support/" className="nav__link">Support</Link>
+                            <Link to="/support/" className="nav__link">技术支持</Link>
                         </li>
                         <li className="nav__item nav__dropdown">
-                            Resources <b className="caret"></b>
+                            资源 <b className="caret"></b>
                             <ul className="dropdown-menu">
-                                <li><Link to="/blogs/" className="nav__link">Blogs</Link></li>
-                                <li><Link to="/resources/" className="nav__link">Other Resources</Link></li>
+                                <li><Link to="/blogs/" className="nav__link">博客</Link></li>
+                                <li><Link to="/resources/" className="nav__link">其他资源</Link></li>
                             </ul>
                         </li>
                     </ul>

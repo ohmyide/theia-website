@@ -55,21 +55,21 @@ export const contributorsAndAdopters = [
 
 export const introsToTheia = [
     {
-        title: "Why Eclipse Theia",
+        title: "为什么是 Theia",
         href: "https://youtu.be/xs0haWTulrY",
-        speaker: "Marc Dumais, Theia project lead and Software Developer at Ericsson AB",
+        speaker: "马克·杜马斯，Theia 项目负责人同时也是爱立信软件工程师",
         src: MarcDumais,
     },
     {
-        title: "How to be an Eclipse Theia Adopter",
+        title: "如何使用 Eclipse Theia",
         href: "https://youtu.be/SPO8pudgJak",
-        speaker: "Jonas Helming, Theia project lead and Principal Software Architect at EclipseSource",
+        speaker: "乔纳斯·赫尔明，来自 EclipseSource， Theia 方向的负责人兼首席软件架构师",
         src: JonasHelming,
     },
     {
-        title: "The Eclipse Theia Architecture",
+        title: "Eclipse Theia 架构",
         href: "https://youtu.be/KN2JUsFuEhU",
-        speaker: "Thomas Mäder, Theia project lead and Principal Software Developer at Red Hat",
+        speaker: "托马斯·米德, Theia 项目负责人，同时也是红帽的首席工程师",
         src: ThomasMader,
     }
 ]

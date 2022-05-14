@@ -2,7 +2,7 @@
 title: README
 ---
 
-# Theia - Cloud & Desktop IDE
+# Theia - 云端 & 桌面端 IDE
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/eclipse-theia/theia/labels/help%20wanted)
 [![Discourse status](https://img.shields.io/discourse/status?color=blue&label=Community&server=https%3A%2F%2Fcommunity.theia-ide.org%2F)](https://community.theia-ide.org/)
 [![Build Status](https://travis-ci.org/eclipse-theia/theia.svg?branch=master)](https://travis-ci.org/eclipse-theia/theia)

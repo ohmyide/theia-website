@@ -59,7 +59,7 @@
      <div className="row">
          <Styled>
              <section className="intros" >
-                 <h3 className="heading-tertiary">Introductions to Eclipse Theia</h3>
+                 <h3 className="heading-tertiary">介绍 Theia</h3>
                  <div className="intros__container">
                     {
                     introsToTheia.map((intro, i) => (
