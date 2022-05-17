@@ -9,36 +9,36 @@ title: README
 [![Open questions](https://img.shields.io/badge/Open-questions-pink.svg?style=flat-square)](https://github.com/eclipse-theia/theia/labels/question)
 [![Open bugs](https://img.shields.io/badge/Open-bugs-red.svg?style=flat-square)](https://github.com/eclipse-theia/theia/labels/bug)
 
-Theia is an extensible platform to develop full-fledged multi-language Cloud & Desktop IDE-like products with state-of-the-art web technologies.
+Theia 是一个使用先进 Web 技术、可扩展、全面支持多语言的云端和桌面端 IDE 平台。
 
 <img src="/theia-screenshot.jpg" alt="Theia IDE Screenshot" class="doc-image">
 
-## Scope
-- Establish a platform to build IDE-like products
-- Provide the end-user with a full-fledged multi-language IDE  (not just a smart editor)
-- Support equally the paradigm of Cloud IDE and Desktop IDE
-- Provide support for multiple languages via the language and debug server protocols
-- Provide modern GUI with javascript UI libraries
+## 能力
+- 构建一个类 IDE 的产品的平台
+- 为终端用户提供成熟的多语言 IDE（不仅仅是智能编辑器）
+- 同等支持云端和桌面端 IDE 两种模式
+- 通过语言调试协议对多种语言提供支持
+- 用 javascript UI 库提供现代化的图形界面
 
-## Contributing
+## 贡献
 
-Read below to learn how to take part in improving Theia:
-- Fork the repository and [run the examples from source](https://github.com/eclipse-theia/theia/tree/master/doc/Developing.md#quick-start)
-- Get familiar with [the development workflow](https://github.com/eclipse-theia/theia/tree/master/doc/Developing.md), [Coding Guidelines](https://github.com/eclipse-theia/theia/wiki/Coding-Guidelines), [Code of Conduct](https://github.com/eclipse-theia/theia/tree/master/CODE_OF_CONDUCT.md) and [learn how to sign your work](https://github.com/eclipse-theia/theia/tree/master/CONTRIBUTING.md#sign-your-work)
-- Find an issue to work on and submit a pull request
-  - First time contributing to open source? Pick a [good first issue](https://github.com/eclipse-theia/theia/labels/good%20first%20issue) to get you familiar with GitHub contributing process.
-  - First time contributing to Theia? Pick a [beginner friendly issue](https://github.com/eclipse-theia/theia/labels/beginners) to get you familiar with codebase and our contributing process.
-  - Want to become a Committer? Solve an issue showing that you understand Theia objectives and architecture. [Here](https://github.com/eclipse-theia/theia/labels/help%20wanted) is a good list to start.
-- Could not find an issue? Look for bugs, typos, and missing features.
+阅读下述资料，了解如何参与优化 Theia:
+- Fork 仓库并 [运行示例](https://github.com/eclipse-theia/theia/tree/master/doc/Developing.md#quick-start)
+- 熟悉 [开发流程](https://github.com/eclipse-theia/theia/tree/master/doc/Developing.md)，[代码规范](https://github.com/eclipse-theia/theia/wiki/Coding-Guidelines)，[代码准则](https://github.com/eclipse-theia/theia/tree/master/CODE_OF_CONDUCT.md) 并 [学习如何签署你的产出](https://github.com/eclipse-theia/theia/tree/master/CONTRIBUTING.md#sign-your-work)
+- 找到要处理的问题并提交PR
+  - 第一次为开源作品贡献代码？ 选择一个 [好的问题开始](https://github.com/eclipse-theia/theia/labels/good%20first%20issue) 让你熟悉 github 的贡献流程。
+  - 第一次贡献 Theia？ 选择一个 [对新人友好的问题](https://github.com/eclipse-theia/theia/labels/beginners)从而熟悉代码库以及和我们贡献的流程。
+  - 想成为贡献者？需要解决一个表明你了解 Theia 目标和架构的问题。 [这里](https://github.com/eclipse-theia/theia/labels/help%20wanted) 是一个好的开始。
+- 找不到问题？查找 bug、拼写错误和缺失功能均可。
 
-## Feedback
+## 反馈意见
 
-Read below how to engage with Theia community:
-- Join the discussion on [Discourse](https://community.theia-ide.org/).
-- Ask a question, request a new feature and file a bug with [GitHub issues](https://github.com/eclipse-theia/theia/issues/new).
-- Star the repository to show your support.
-- Follow Theia on [Twitter](https://twitter.com/theia_ide).
+阅读下述内容，了解如何参与 Theia 社区互动：
+- [参加讨论](https://community.theia-ide.org/)。
+- 提出问题，请求新功能以及使用 [GitHub issues](https://github.com/eclipse-theia/theia/issues/new) 提交 bug。
+- Star 仓库以表支持。
+- 关注 Theia 官方 [Twitter](https://twitter.com/theia_ide)。
 
-## License
+## 授权协议
 
 [EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0](https://github.com/eclipse-theia/theia/blob/master/LICENSE)

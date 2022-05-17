@@ -23,33 +23,33 @@ const M = (title, path, subMenu, indented = false) => ({
 
 export const MENU = [
     {
-        title: 'Overview'
+        title: '概述'
     },
     M(
-        'Getting Started',
+        '起步',
         'getting_started'
     ),
     M(
-        'Architecture Overview',
+        '架构概述',
         'architecture'
     ),
     M(
-        'Project Goals',
+        '项目目标',
         'project_goals'
     ),
     M(
-        'Extensions and Plugins',
+        '扩展和插件',
         'extensions'
     ),
     M(
-        'Services and Contributions',
+        '服务和贡献',
         'services_and_contributions'
     ),
     {
-        title: 'Using Theia'
+        title: '使用 Theia'
     },
     M(
-        'Build your own IDE/Tool',
+        '构建自己的 IDE 工具',
         'composing_applications'
     ),
     M(
