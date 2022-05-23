@@ -3,28 +3,20 @@ title: TextMate Coloring
 ---
 
 
-# TextMate Support in Theia
+# Theia 支持 TextMate
 
-TextMate grammars allow us to colorize most source files with accurate
-decorations, even if it is only at the syntactic level (no language deep
-understanding). Semantic coloring can be provided by Language Servers, among
-others.
+TextMate 语法使我们能够准确地为大多数代码文件高亮显示，即使它只是在语法层面（没有语言深度
+理解）。语义着色可以由语言服务提供支持。
 
-TextMate grammars majorly come in two formats: `.plist` and `.tmLanguage.json`,
-Theia supports both.
+TextMate 语法主要有两种格式：`.plist` 和 `.tmLanguage.json`，Theia 两者都支持。
 
-You can read more about TextMate grammars
-[here](https://macromates.com/manual/en/language_grammars).
+[点击这里](https://macromates.com/manual/en/language_grammars) 阅读有关 TextMate 语法的更多信息。
 
-> Note: grammars for a particular language should go inside the dedicated
-> extension for said language. `@theia/textmate-grammars` is just a registry for
-> languages that currently do not have any specific extension for them.
+> 注意：特定语言的语法应该放在该语言专用的扩展中。 `@theia/textmate-grammars` 目前没有任何特定扩展名的语言注册表。
 
-## Adding new grammars
+## 添加新语法支持
 
-In order to contribute a new grammar for a language, the usual pattern is to
-create a `data` folder under your extension's root, and store the different
-grammars here.
+为了为一种语言贡献一种新的语法，通常的模式是在扩展的根目录下创建一个 `data` 文件夹，存储对应语法文件：
 
 ```
 extension/
@@ -38,8 +30,7 @@ extension/
     ...
 ```
 
-Then, inside your `package.json` you would declare the following property in
-order to publish the grammars along the source and built files.
+然后，在 `package.json` 中，分别为源文件和构建后的文件语法，添加以下配置：
 
 ```json
   "files": [
@@ -49,8 +40,7 @@ order to publish the grammars along the source and built files.
   ],
 ```
 
-From your extension, you can now contribute via the
-`LanguageGrammarDefinitionContribution` contribution point.
+现在可以从扩展中，通过 `LanguageGrammarDefinitionContribution` 贡献能力。
 
 ```ts
 @injectable()
@@ -73,10 +63,7 @@ export class YourContribution implements LanguageGrammarDefinitionContribution {
 }
 ```
 
-In the case were you would use `.plist` grammars, you cannot use `require` in
-order to directly obtain the content, because Webpack will instead return the
-name of a file to fetch from the server. In that case, the following pattern
-applies in order to fetch the file's content:
+如果你使用 `.plist` 语法，则不能通过 `require` 直接获取内容，因为 Webpack 会改为从服务器获取的文件。在这种情况下，用下述方式可获取文件内容：
 
 ```ts
 @injectable()

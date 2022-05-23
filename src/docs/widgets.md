@@ -4,41 +4,42 @@ title: Widgets
 
 # Widgets
 
-A widget is a part displaying content within the Theia workbench, e.g. a view or an editor. Examples for existing widgets in Theia are the file explorer, the code editor or the problems view. By contributing custom widgets, you can place your own custom UI in a Theia-based application. Your custom UI will behave the same as other widgets in terms of window layouting including the title tab, resizing, dragging and opening/closing (see screenshot below). 
+widget 是在 Theia 工作台面板上显示内容的部分，可能是一个视图或一个编辑器。Theia 中现有的 widget 例子是文件资源管理器、代码编辑器以及报错面板。通过扩展自定义的 widget，你可以在 Theia 应用中嵌入自定义 UI。你的自定义 UI 在窗口布局方面的行为与其他 widget 相同，包括标题标签、调整大小、拖动以及打开/关闭动作（见下面的截图）。
+
 
 <img src="/widget-example.gif" alt="Widget Example" style="max-width: 525px">
 
-Furthermore, a widget will receive events from the surrounding workbench, e.g. on application start, on resize or on detach. The implementation of the actual content of a widget, which is rendered in the provided frame is completely up to you, though. As an example, you can implement some custom UI using React within a widget.
+此外，widget 能从周边工作台上接收事件，例如，在应用启动时、在调整大小时或在销毁时。不过，一个 widget 的实际的内容展示信息，完全由自己定义。作为一个例子，你可以在一个 widget 中使用 React 实现一些自定义的 UI。
 
-In a nutshell, a widget is a frame to embed some custom (HTML-based) UI into the Theia workbench (see diagram below)
+简而言之，widget 是一个框架能力，用于将一些自定义（基于HTML的）UI 嵌入 Theia 工作台（见下图）。
 
 <img src="/widget-architecture.png" alt="Widget Architecture" style="max-width: 525px">
 
-In this article we will describe how to contribute a custom widget to the Theia workbench. We will focus on a simple view (in contrast to an editor) and use React to implement the UI. 
+本文档将介绍如何为 Theia 工作台扩展一个自定义的 Widget。我们将专注实现一个简单的视图组件（而非复杂的代码编辑器），并使用 React 来实现界面 UI。
 
-If you are not yet familiar with contribution points in Theia or the use of dependency injection, please consider this guide on [Services and Contributions](https://theia-ide.org/docs/services_and_contributions/).
+如果你还不熟悉 Theia 的贡献点或依赖注入的使用机制，请参考 [Services and Contributions](https://theia-ide.org/docs/services_and_contributions/) 指南。
 
-If you would like to have a look at the example code, please use the [Theia extension generator](https://github.com/eclipse-theia/generator-theia-extension). Install the generator, select the “Widget” example and enter “MyWidget” as a name for the extension.
+如果想看示例代码，请使用 [Theia extension generator](https://github.com/eclipse-theia/generator-theia-extension)。安装并选择 “Widget” 示例，输入 “MyWidget” 作为扩展名称。
 
-## Contributing a Widget (a View)
+## 实现一个 Widget（视图）。
 
-Contributing a widget, in our example a view consists of three components:
+在例子中，要实现一个 Widget 需要由三个部分组成：
 
 <ul>
-<li>The actual <b>widget</b>, responsible for:
+<li>一段完整的<b>widget</b>代码实现，包含：
     <ul>
-    <li>Setting base parameters, such as an ID, a label and an icon</li>
-    <li>Creating the actual UI and its behavior</li>
-    <li>Reacting to lifecycle events such as `onUpdateRequest` or `onResize`</li>
+    <li>基本参数，如 ID、label 和 icon图标</li>
+    <li>具体的 UI 实现和它的操作行为</li>
+    <li>处理生命周期事件，如 "onUpdateRequest" 或 "onResize"</li>
     </ul>
 </li>
-<li>A <b>widget factory</b>, responsible for instantiating the widget</li>
-<li>A <b>widget contribution</b>, responsible for wiring the view with the Theia workbench so that the widget can be opened from within the Theia workbench, e.g. via the views menus</li>
+<li>一个<b> Widget 类</b>用于产出 widget 实例</li>
+<li>一个<b> Widget 贡献点</b> 用于将视图与 Theia 工作台连接起来，以便可以从 Theia 工作台中打开 widget，比如通过视图菜单打开。</li>
 </ul>
 
-### Implementing a Widget
+### 实现一个 Widget
 
-For the implementation of custom widgets, Theia provides several base classes to inherit from. This enables you to focus on creating your custom UI only, as the base classes already implement most required functions. Theia does not depend on a specific UI technology, like React, Vue.js or Angular. However, it provides convenience support by providing respective base classes, e.g. for React. If in doubt, using React is the most common choice for implementing custom widgets at the moment. Below you find an excerpt of the class hierarchy. In case you want to implement a widget using react, choose `ReactWidget` as a base class. If you want to implement a widget that mainly displays a tree, use `TreeWidget`. If you do not want to use React, use `BaseWidget`. Browse the type hierarchy of `BaseWidget` to see other available options.
+为实现自定义 widgets，Theia 提供了几个基类来继承。这些基类已经实现了 widgets 所需的大部分功能，从而让开发者专注于创建自定义 UI。Theia 不依赖于特定的 UI 技术实现，用 React、Vue.js 或 Angular 都可实现。它们通过各自的基类来提供便捷的支持，如 React 模块。为避免纠结，使用 React 是目前实现自定义 widgets 的首选。下面是类的结构关系图。如果你想用 React 实现一个 widget，选择 `ReactWidget` 作为基类。如果你想实现一个树结构的 widget，请使用 `TreeWidget`。如果你不想使用 React，可以用 `BaseWidget`。查看 `BaseWidget` 的类结构关系，了解更多可用选项。
 
 <ul>
 <li>BaseWidget
@@ -53,13 +54,14 @@ For the implementation of custom widgets, Theia provides several base classes to
 </li>
 </ul>
 
-In the following code examples, we use `ReactWidget` as a base class. As shown below, we first initialize the widget with some base parameters:
+在代码案例中，我们用 `ReactWidget` 作为基类。如下图所示，先用一些基本参数来初始化 widget：
 
-* `id`: To uniquely identify the widget, e.g. to open it via the WidgetManager.
-* `label`: Shown in the tab when the widget is open.
-* `caption`: Shown when hovering over the tab when the widget is open.
-* `closable`: Whether the user can close the widget (via the “x” in the tab or via right click menu).
-* `iconClass`: The icon shown in the tab when the widget is opened.
+
+* `id`: 用于 widget 的唯一标识，比如用 WidgetManager 打开 widget 时用到。
+* `label`: 用于 widget 打开时的标签显示。
+* `caption`: 用于 widget 打开时，在标签上的悬停显示。
+* `closable`: 配置用户是否可以关闭 widget（通过标签中的 "x" 或右键菜单）。
+* `iconClass`: 用于 widget 打开时，在标签上的图标展示。
 
 **mywidget-widget.ts**
 ```typescript
@@ -80,7 +82,7 @@ protected async init(): Promise < void> {
 }
 ```
 
-When using the respective base class, the implementation of a widget can be really minimal and focussed on the custom UI part. In our example, we just implement the render function that will create our actual custom UI (using JSX/React). The example UI contains a button that will trigger the `displayMessage` function below.
+基类能让我们只专注于 widget 的自定义 UI 部分，做到了真正意义上的最小成本。在例子中，我们只实现了渲染函数，该函数将创建 UI 界面（使用JSX/React）。这个例子的 UI 包含一个按钮，用于触发 `displayMessage` 函数。
 
 **mywidget-widget.ts**
 ```typescript
@@ -100,11 +102,11 @@ protected displayMessage(): void {
 }
 ```
 
-Please note, that you can override functions of `BaseWidget` or `ReactWidget` to hook into specific life cycle events of a widget, e.g. `onUpdateRequest` or `onResize`. These events are defined by [Phosphor.js](https://phosphorjs.github.io/), the underlying window management framework, see [this documentation](http://phosphorjs.github.io/phosphor/api/widgets/classes/widget.html) about the `Widget` class.
+请注意，你也可以覆盖 `BaseWidget` 或 `ReactWidget` 来创建一个特定的 widget 生命周期钩子函数，如 `onUpdateRequest` 或 `onResize`。这些事件是由底层窗口管理框架 [Phosphor.js](https://phosphorjs.github.io/) 定义的，关于 `Widget` 类，请看 [这篇文档](http://phosphorjs.github.io/phosphor/api/widgets/classes/widget.html)。
 
-Besides implementing the actual widget, you need to wire it with the Eclipse Theia workbench, which is described in the next two sections.
+除了编写 widget，你还需要用 Theia 工作台把它连接起来，这将在接下来的两节中介绍。
 
-### Implementing a Widget Factory
+### 实现一个 Widget 工厂
 
 Widgets in Theia are instantiated and managed by a central service, the `WidgetManager`. This allows the application to keep track of all created widgets. As an example, the `WidgetManager` supports the function `getOrCreate`, which will either return an existing widget, if it was already created, or create a new one if not.
 

@@ -2,23 +2,23 @@
 title: Commands/Menus/Keybindings
 ---
 
-# Commands, Menus and Keybindings
+# 命令、菜单以及快捷键
 
-Commands are runnable actions defined by an ID and the function to be executed (plus some optional parameters like a name or an icon). Commands can be triggered via the command palette, they can be bound to keybindings or menu items and they can be called programmatically. The action that commands trigger can be context sensitive, so that they can only be called under certain conditions (window focus, current selection etc.).
+命令由 ID 和对应的执行函数定义（以及一些可选参数，如名称或图标）。命令可以通过命令面板触发，它们可以绑定到键绑定或菜单项，并且可以通过程序调用。命令触发的动作是与执行环境紧密相连的，因此它们只能在特定条件下调用（如：窗口被选中、当前项被选择等）。
 
-The following sections provide details about how to contribute commands, keybindings and menu items. The sections will describe how to connect the different contributions and how to use the corresponding services for managing these items.
+以下部分介绍如何提供命令、快捷键绑定和菜单项的详细信息，将描述如何使用不同的贡献点以及如何使用相应的服务来管理这些选项。
 
-If you are not yet familiar with contribution points in Theia or the use of dependency injection, please consider this guide on [Services and Contributions](https://theia-ide.org/docs/services_and_contributions/).
+如果你还不熟悉 Theia 中的贡献点或依赖注入的使用，请参考 [Services and Contributions 指南] (https://theia-ide.org/docs/services_and_contributions/)。
 
-All the following code examples are from the [Theia extension generator](https://github.com/eclipse-theia/generator-theia-extension). You can get the same code set-up by installing the generator, selecting the “Hello World” example (see here) and choosing “helloworld” as the name. 
+以下所有代码示例均来自 [Theia 扩展生成器](https://github.com/eclipse-theia/generator-theia-extension)。你可以用生成器生成通用的代码（“Hello World”示例）
 
-## Contributing Commands
+## 创建命令
 
-By contributing a command, you can add a custom action to Theia. A command can be triggered by the user via the command palette, a keybinding or a menu entry. It can also be called programmatically.
+通过命令贡献点，你可以向 Theia 添加自定义操作。用户可以通过命令面板、快捷键绑定或菜单条目触发命令，同样也可以通过代码调用。
 
-All commands of a Theia application are managed in the `CommandRegistry`. To contribute commands to the command registry, modules must implement the `CommandContribution` interface (see code example below). 
+Theia 应用的所有命令都在 `CommandRegistry` 中管理。要向命令注册表中贡献命令，模块必须实现 `CommandContribution` 接口（参见下面的代码示例）。
 
-A command is an object with an `id` and an optional, potentially user visible `label` (see HelloworldCommand in the example below). The command contribution receives the `CommandRegistry` in the `registerCommands` function as a parameter. The command can then be registered by calling `registerCommand` on this registry. Along with the command a callback needs to be provided which is executed whenever the command is triggered (`CommandHandler`). In the example, the command uses the MessageService to “say hello”. 
+命令是由一个包含 `id` 和一个用户可选的 `label` 对象组成（参见下面示例中的 HelloworldCommand）。 命令贡献接收 `registerCommands` 函数中的 `CommandRegistry` 作为参数。 然后以此调用 `registerCommand` 来注册该命令。除了命令之外，还需要提供一个回调，该回调在命令被触发时执行（`CommandHandler`）。 在示例中，该命令使用 MessageService 来实现 “say hello”。
 
 **helloworld-contribution.ts**
 ```typescript
@@ -43,13 +43,14 @@ export class HelloworldCommandContribution implements CommandContribution {
 
 ```
 
-To make the command execution context sensitive, the `CommandHandler` can optionally implement `isEnabled` and `isVisible`. You can optionally register more than one `CommandHandler` and let the command execute one of them based on the current context. To register additional handlers for a command use the `registerHandler` function on the `CommandRegistry`
-When a command is executed, the command registry checks all registered handlers. The first handler that returns true on `isEnabled` will be considered to be active and it will be executed. Only one handler should be active (`isEnabled === true`) at the same time, though. `isVisible` controls the visibility of menu items and tool items that are connected to a command, as well as whether the command is shown in the command palette.  If the active handler returns true, the menu item will be visible and vice versa.
-Finally, by implementing `isToggle` a handler can optionally specify, whether menu items connected to the commands should be toggled on or off.
+为了使命令执行上下文更加可控，`CommandHandler` 可以选择实现 `isEnabled` 和 `isVisible`。您可以选择注册多个 `CommandHandler` 并让命令根据当前上下文执行其中一个。要为命令注册其他处理程序，请使用 `CommandRegistry` 上的 `registerHandler` 函数
+执行命令时，命令注册表会检查所有已注册的处理程序。在 `isEnabled` 上返回 true 的第一个处理函数视为活跃状态，并将被执行，且同一时刻应该只有一个处理函数处于活跃状态（`isEnabled === true`）。 `isVisible` 控制连接到命令的菜单项和工具项是否可见，以及命令是否显示在命令面板中。如果行为处理函数返回 true，则菜单项将可见，反之亦然。
+最后，通过实现 `isToggle`，处理函数可以选择绑定命令的菜单项是打开还是关闭。
 
-### Binding the contribution to CommandContribution
 
-To make our `CommandContribution` accessible to Theia, we need to bind the custom `HelloworldCommandContribution` to the respective contribution symbol `CommandContribution`. This is done in the `helloworld-frontend-module`, for more details see [Services and Contributions](https://theia-ide.org/docs/services_and_contributions/).
+### 绑定到 CommandContribution 贡献点
+
+为了让我们的 `CommandContribution` 能够被 Theia 访问，我们需要将自定义的 `HelloworldCommandContribution` 与对应的贡献点标识符 `CommandContribution` 绑定。这是在 `helloworld-frontend-module` 中实现的，更多细节见 [Services and Contributions]（https://theia-ide.org/docs/services_and_contributions/）。
 
 **helloworld-frontend-module.ts**
 ```typescript
@@ -60,21 +61,21 @@ export default new ContainerModule(bind => {
 });
 ```
 
-The `CommandRegistry` used to register our contributed command above, also provides an API to interact with commands. As an example, you can programmatically execute commands, you can browse through all registered commands or you can access a list of recently executed commands. Please refer to the [TypeDoc for the CommandRegistry](https://eclipse-theia.github.io/theia/docs/next/classes/core.commandregistry-1.html) for more details. To use the `CommandRegistry` outside of a contribution, you can access it via dependency injection.
+上述用来注册命令的 `CommandRegistry` 也提供了与命令交互的 API。例如，你可以用代码方式执行命令，可以浏览所有注册的命令，可以访问最近执行的命令列表。更多细节请参考[TypeDoc for the CommandRegistry]（https://eclipse-theia.github.io/theia/docs/next/classes/core.commandregistry-1.html）。要在贡献点之外使用`CommandRegistry`，你可以通过依赖注入来访问它。
 
-In the following sections, we describe how to bind commands to menu items and keybindings.
+在下面的章节中，我们将阐述如何将命令与菜单项、快捷键绑定。
 
-## Contributing Menu Items
+## 扩展菜单项
 
-Theia allows you to contribute menu items that will be displayed in specific menus within your Theia application. Menu items are bound to commands and therefore allow the user to trigger actions (please see the section about commands above).
+Theia允许扩展菜单项，这些菜单项将显示在 Theia 应用程序的特定菜单中。菜单项与命令绑定，用户可以此触发动作（请见上面关于命令的部分）。
 
-All the following code examples are from the [Theia extension generator](https://github.com/eclipse-theia/generator-theia-extension). You can get the same code set-up by installing the generator, selecting the “Hello World” example (see [here](https://github.com/eclipse-theia/generator-theia-extension)) and choosing “helloworld” as the name.
+下面所有的代码例子由 [Theia extension generator](https://github.com/eclipse-theia/generator-theia-extension) 产出，你可以通过安装生成器，选择"helloworld "作为名称来产出同样的代码，[here](https://github.com/eclipse-theia/generator-theia-extension)。
 
-All menu items of a Theia application are managed in the `MenuModelRegistry`. To contribute menu items to the registry, modules must implement the ´MenuContribution´ interface (see code example below). 
+Theia 应用的所有菜单项都在 MenuModelRegistry 中管理。为了向注册表中贡献菜单项，模块必须实现 "MenuContribution"接口（见下面的代码示例）。
 
-The registration of the command can be done in the function `registerMenus`, which will be called by the Theia framework. The function provides the `MenuModelRegistry` as a parameter. On this registry we can call `registerMenuAction`. It expects a `MenuPath` and a `MenuAction`. The `MenuPath` specifies the menu (and submenu) to place the menu item into. Please see [here for the paths of some common menus](https://eclipse-theia.github.io/theia/docs/next/modules/core.commonmenus-1.html).
+命令的注册可以在函数 registerMenus 中完成，它在 Theia 框架中调用，该函数以 MenuModelRegistry 作为参数，在这个注册表上，我们可以调用 registerMenuAction。它的参数有MenuPath 和 MenuAction，MenuPath 指定了要放置菜单项的菜单（和子菜单）。关于一些常见菜单的路径，[请点击这里](https://eclipse-theia.github.io/theia/docs/next/modules/core.commonmenus-1.html)。
 
-The `MenuAction` consists of a command id, specifying which command to trigger, and an optional label, specifying the label of the menu item.
+MenuAction 包含一个命令 ID，和一个可选的 label 标签，分别用于指定要触发的命令和菜单项。
 
 **helloworld-contribution.ts**
 ```typescript
@@ -90,7 +91,7 @@ export class HelloworldMenuContribution implements MenuContribution {
 }
 ```
 
-To make our `MenuContribution` accessible to Theia, we need to bind the custom `HelloWorldMenuContribution` to the respective contribution symbol `MenuContribution`. This is done in the `helloworld-frontend-module`, for more details see [Services and Contributions](https://theia-ide.org/docs/services_and_contributions/).
+为了让 `MenuContribution` 能够被 Theia 访问，我们需要将自定义的 `HelloWorldMenuContribution` 与对应的贡献点标识符 `MenuContribution` 绑定。这是在`helloworld-frontend-module`中完成的，更多细节见[Services and Contributions](https://theia-ide.org/docs/services_and_contributions/)。
 
 **helloworld-contribution.ts**
 ```typescript
@@ -101,20 +102,19 @@ export default new ContainerModule(bind => {
 
 ```
 
-Please note that you also contribute menu items without a command which allows you to create custom top level menus and sub menus. To achieve this, contribute a menu item without a command and then reference the id of this menu item as a `MenuPath` in other contributes. This will add menu items to your custom menu.
+注意，你也可以创建没有命令的菜单项，这允许你创建自定义的顶层菜单和子菜单。要做到这一点，请先新建一个没有命令的菜单项，然后在其他贡献中引用这个菜单项的 id 作为 `MenuPath`。这将为你的自定义菜单添加菜单项。
 
-## Contributing Keybindings
+## 实现快捷键绑定
 
-Keybindings allow the user to trigger commands using specific key combinations. Keybindings can define conditions, specifying when they are active. As an example, there can be keybindings that are only active when the text editor is focused.
+快捷键绑定允许用户使用特定的按键组合来触发命令。快捷键绑定可以定义条件，指定它们何时被激活。比如：有一些快捷键，只有当文本编辑器被聚焦时才会激活。
 
-Please note that the following code examples are not part of the generated template, so you will need to manually add them (see previous sections).
+需注意，下面的代码例子不是生成的模板的一部分，你需要手动编辑它们（见前面的章节）。
 
-To contribute a keybinding, implement a `KeybindingContribution` (see code example below) with which you can access the `KeybindingRegistry`, allowing you to register a keybinding. Keybindings consist of:
+要开发一个快捷键绑定，需实现 `KeybindingContribution` 接口（见下面的代码例子），通过它可以访问 `KeybindingRegistry` 来实现快捷键注册。快捷键由以下部分组成。
 
-* `keybinding`: The key combination
-* `command`: The id of the command to be triggered
-* `when`(optional): The condition when the keybinding should be active
-
+* `keybinding`: 快捷键组合
+* `command`: 要触发的命令ID
+* `when`(可选): 快捷键被激活的条件
 
 **helloworld-keybinding-contribution.ts**
 ```typescript
@@ -129,10 +129,9 @@ export class HelloworldKeybindingContribution implements KeybindingContribution 
 }
 ```
 
-The syntax for the “when” clause follows the [VS Code terminology](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts). Modifiers are platform independent, so [`Modifier.M1`](https://eclipse-theia.github.io/theia/docs/next/enums/core.keymodifier-2.html#ctrlcmd) is Command on OS X and CTRL on Windows/Linux. Key string constants can be viewed in [`Key` documentation](https://eclipse-theia.github.io/theia/docs/next/modules/core.key-2.html).
+上述 `when` 配置遵循 [VS Code terminology](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts)。键盘映射做到了平台兼容，在OS X上是Command，在Windows/Linux上是 CTRL。键值数据可以在[`Key` documentation](https://eclipse-theia.github.io/theia/docs/next/modules/core.key-2.html)中查看。
 
-Just as you needed to bind the contributions before, keybinding contributions also need to be bound to the symbol `KeybindingContribution` to make them accessible for Theia.
-
+和之前的贡献点绑定方式一样，快捷键的贡献也需要绑定到 `KeybindingContribution` 上，以便让 Theia 能够访问到。
 
 **editor-frontend-module.ts**
 ```typescript

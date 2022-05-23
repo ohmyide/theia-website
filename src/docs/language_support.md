@@ -3,7 +3,7 @@ title: Adding Language Support
 ---
 
 
-# Theia - Adding Language Support
+# Theia - 添加代码语言支持
 
-* <a href="/docs/textmate/">TextMate Coloring</Link>
+* <a href="/docs/textmate/">TextMate 语法高亮</Link>
 

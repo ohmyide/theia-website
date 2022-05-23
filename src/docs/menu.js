@@ -53,7 +53,7 @@ export const MENU = [
         'composing_applications'
     ),
     M(
-        'Authoring Extensions',
+        '开发扩展',
         'authoring_extensions'
     ),
     M(
