@@ -2,33 +2,22 @@
 title: Property View
 ---
 
-# Property View
+# 属性视图
 
-Many IDEs, such as the traditional Eclipse IDE, have the notion of a global, extensible property view,
-which shows additional information about the current selection within the IDE.
-Property views are heavily used in those IDEs for showing details of elements in e.g. diagram editors,
-complex tree editors, or the file explorer selection.
-Therefore, the main idea is to have a global, generic property view in the IDE,
-but allow specific implementations to extend the contents of the global property view
-with specific additional information for some type of selection.
+很多 IDE（例如传统的 Eclipse IDE）都具有全局、可扩展属性视图的概念，它显示 IDE 当前选中元素的附加信息，属性视图在这些 IDE 中大量使用，用于在图表编辑器、复杂树编辑器或文件浏览器中显示元素的详细信息。我们的想法是在 IDE 中拥有一个全局的、通用的属性视图，也允许扩展全局属性视图的内容，并为某些元素类型的选择提供特定的附加信息展示。
 
-The `@theia/property-view extension` contributes a generic, global property view based on Theia's global selection.
-The property view widget can be opened/toggled either via menu `View->Properties` or via shortcut <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd>.
-It is located in the bottom dock area by default.
-The following two default content widgets are implemented in this extension:
+`@theia/property-view extension` 是 Theia 内置的通用全局属性视图，属性视图 widget 可以通过菜单 `View->Properties` 或快捷键 <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd> 触发。它默认位于底部停靠区，此扩展中实现了以下两个默认内容的 widget：
 
-- `EmptyPropertyViewWidget`: If no other widget can be provided, a simple message (`No properties available`) is shown.
-- `ResourcePropertyViewWidget`: Displays additional information about a file (e.g. location, name, last modified) that is selected in the file explorer or in the active monaco editor.
+- `EmptyPropertyViewWidget`: 如果没有可用的 widget，会提示 (`No properties available`)。
+- `ResourcePropertyViewWidget`: 显示在文件资源管理器或当前 Monaco 编辑器选中文件的额外信息（如位置、名称、最后修改）。
 
-## Contribute a Custom Property View
+## 贡献自定义属性视图
 
-To contribute a specific property view, it is necessary to implement a `PropertyViewDataService` which gathers the property data for a selection
-as well as a `PropertyViewWidgetProvider` which provides a suitable content widget to display the property data for a specific selection inside the property view widget.
+为贡献特定的属性视图，需要实现 `PropertyViewDataService`，它收集供选择的属性数据，以及`PropertyViewWidgetProvider`，它提供合适的 widget 来显示属性视图内所选的属性数据。
 
-Here is a short example of how to implement an additional property view, which displays the name and whether it is a file or directory
-in a simple React widget based on the selection from the file explorer (assuming there would be no `ResourcePropertyViewWidget` of course):
+下面的案例将简单的演示基于 ReactWidget 的自定义视图，其功能是根据文件资源管理器的当前选择，显示对应的名称以及它是一个文件还是目录（当然，这里假设没有`ResourcePropertyViewWidget`）。
 
-The `FileInfoPropertyDataService` gathers the file information and delivers a custom object:
+`FileInfoPropertyDataService` 收集文件信息并提供一个自定义对象。
 
 `custom-data-service.ts`:
 
@@ -66,9 +55,9 @@ export class FileInfoPropertyDataService implements PropertyDataService {
 }
 ```
 
-The `FileInfoPropertyWidget` is a simple `ReactWidget` and displays the selected node and whether it is a file or directory:
+`FileInfoPropertyWidget` 是个简单的 `ReactWidget` 用于显示所选节点以及它是一个文件还是目录：
 
-`custom-content-widget.tsx`:
+`custom-content-widget.tsx`：
 
 ```typescript
 export class FileInfoPropertyViewWidget extends ReactWidget implements PropertyViewContentWidget {
@@ -103,9 +92,9 @@ export class FileInfoPropertyViewWidget extends ReactWidget implements PropertyV
 }
 ```
 
-The `FileInfoPropertyViewWidgetProvider` is responsible to provide the correct `PropertyViewContentWidget` based on the selection:
+`FileInfoPropertyViewWidgetProvider` 负责根据选择提供正确的 `PropertyViewContentWidget`。
 
-`custom-widget-provider.ts`:
+`custom-widget-provider.ts`：
 
 ```typescript
 @injectable()
@@ -139,15 +128,16 @@ export class FileInfoPropertyViewWidgetProvider extends DefaultPropertyViewWidge
 }
 ```
 
-In the frontend module of the application the `FileInfoPropertyDataService` as well as the `FileInfoPropertyViewWidgetProvider` are registered as follows:
+在应用的前端模块中，`FileInfoPropertyDataService` 以及 `FileInfoPropertyViewWidgetProvider` 按如下方式注册：
+
 
 ```typescript
 bind(PropertyDataService).to(FileInfoPropertyDataService).inSingletonScope();
 bind(PropertyViewWidgetProvider).to(FileInfoPropertyViewWidgetProvider).inSingletonScope();
 ```
 
-Following these few steps should give the reader an idea on how to implement an own property view, consisting of a specific `PropertyViewWidgetProvider` and `PropertyViewDataService`.
+根据这几个步骤，读者应该知道如何实现自定义属性视图，本质是由特定的 `PropertyViewWidgetProvider` 和 `PropertyViewDataService` 组成。
 
-The resulting property view will be displayed like this:
+最终属性视图运行效果如下：
 
 <img src="/custom-property-view.gif" alt="Property View - custom widget" style="max-width: 690px">

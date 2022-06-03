@@ -2,24 +2,22 @@
 title: Communication via JSON-RPC
 ---
 
-# Communication via JSON-RPC
+# 用 JSON-RPC 通信
 
-In this section I will explain how you can create a backend service and
-then connect to it over JSON-RPC.
+本节我将解释如何创建后端服务，并通过 JSON-RPC 连接到它。
 
-I will use the debug logging system as a small example of that.
+我将使用调试日志系统作为例子。
 
-## Overview
+## 概述
 
-This works by creating a service exposed by the express framework and
-then connecting to that over a websocket connection.
+这由 express 框架创建的服务，并用 websocket 连接到它。
 
-## Registering a service
+## 服务注册
 
-So the first thing you will want to do is expose your service so that the
-frontend can connect to it.
+要做的第一件事就是开放你的服务，以便前端可以连接到它。
 
-You will need to create backend server module file similar to this (logger-server-module.ts):
+你需要创建与此下述后端服务类似的文件 (logger-server-module.ts)：
+
 
 ``` typescript
 
@@ -38,22 +36,19 @@ export const loggerServerModule = new ContainerModule(bind => {
 });
 ```
 
-Let's go over that in detail:
+来详细了解一下：
 
 ``` typescript
 import { ConnectionHandler, JsonRpcConnectionHandler } from "../../messaging/common";
 ```
 
-This imports the `JsonRpcConnectionHandler`, this factory enables you to create
-a connection handler that onConnection creates proxy object to the object that
-is called in the backend over JSON-RPC and expose a local object to JSON-RPC.
+这里导入了 `JsonRpcConnectionHandler`，这个工厂使你能够创建连接处理程序，onConnection 用 JSON-RPC 在后端调用的对象创建代理，并将本地对象公开给 JSON-RPC。
 
-We'll see more on how this is done as we go.
+跟着我们的步骤，将看到这是如何一步步完成。
 
-The `ConnectionHandler` is a simple interface that specifies the path of the
-connection and what happens on connection creation.
+`ConnectionHandler` 是一个简单的接口，它指定了连接的路径以及创建连接的情况。
 
-It looks like this:
+像这样：
 
 ``` typescript
 import { MessageConnection } from "vscode-jsonrpc";
@@ -70,29 +65,23 @@ export interface ConnectionHandler {
 import { ILoggerServer, ILoggerClient } from '../../application/common/logger-protocol';
 ```
 
-The logger-protocol.ts file contains the interfaces that the server and the
-client need to implement.
+logger-protocol.ts 文件包含服务器和客户端需要实现的接口。
 
-The server here means the backend object that will be called over JSON-RPC
-and the client is a client object that can receive notifications from the
-backend object.
+这里的服务器指的是将通过 JSON-RPC 调用的后端对象，而客户端是一个可以接收来自后台通知的对象。
 
-I'll get more into that later.
+我将在后面详细介绍。
 
 ``` typescript
     bind<ConnectionHandler>(ConnectionHandler).toDynamicValue(ctx => {
 ```
 
-Here a bit of magic happens, at first glance we're just saying here's an
-implementation of a ConnectionHandler.
+这里发生了一些神奇的事情，乍一看，我们只是说这里实现的ConnectionHandler。
 
-The magic here is that this ConnectionHandler type is bound to a
-ContributionProvider in messaging-module.ts
+这里的神奇之处在于，在 messaging-module.ts 中， ConnectionHandler 类型被绑定到 ContributionProvider 。
 
-So as the MessagingContribution starts (onStart is called) it creates a
-websocket connection for all bound ConnectionHandlers.
+所以当 MessagingContribution 启动时（onStart被调用），它会为所有绑定的 ConnectionHandler 创建websocket连接。
 
-like so (from messaging-module.ts):
+像这样（来自messaging-module.ts）：
 
 ``` typescript
 constructor( @inject(ContributionProvider) @named(ConnectionHandler) protected readonly handlers: ContributionProvider<ConnectionHandler>) {
@@ -113,15 +102,15 @@ constructor( @inject(ContributionProvider) @named(ConnectionHandler) protected r
     }
 ```
 
-To dig more into ContributionProvider see this [section](Services_and_Contributions#contribution-providers).
+想进一步了解 ContributionProvider，[请看这里](Services_and_Contributions#contribution-providers).
 
-So now:
+因此现在：
 
 ``` typescript
 new JsonRpcConnectionHandler<ILoggerClient>("/services/logger", client => {
 ```
 
-This does a few things if we look at this class implementation:
+我们看一下这个类的实现，这里做了这么几件事：
 
 ``` typescript
 export class JsonRpcConnectionHandler<T extends object> implements ConnectionHandler {
@@ -139,9 +128,9 @@ export class JsonRpcConnectionHandler<T extends object> implements ConnectionHan
 }
 ```
 
-We see that a websocket connection is created on path: "logger" by the extension of the ConnectionHandler class with the path attribute set to "logger".
+我们看到，websocket 连接是通过 ConnectionHandler 类的扩展，在 "logger" 路径上创建的，路径属性被设置为 "logger"。
 
-And let's look at what it does onConnection :
+现在看看 onConnection 是什么：
 
 ``` typescript
     onConnection(connection: MessageConnection): void {
@@ -152,26 +141,25 @@ And let's look at what it does onConnection :
 ```
 
 
-Let's go over this line by line:
+我们一行行的看下去：
 
 ``` typescript
     const factory = new JsonRpcProxyFactory<T>(this.path);
 ```
 
-This creates a JsonRpcProxy on path "logger".
+这里在 "logger" 路径上创建 JsonRpcProxy：
 
 ``` typescript
     const proxy = factory.createProxy();
 ```
 
-Here we create a proxy object from the factory, this will be used to call
-the other end of the JSON-RPC connection using the ILoggerClient interface.
+这里我们从工厂创建代理对象，它被用来调用使用 ILoggerClient 接口连接 JSON-RPC 的另一端。
 
 ``` typescript
     factory.target = this.targetFactory(proxy);
 ```
 
-This will call the function we've passed in parameter so:
+这将调用我们在参数中传递的函数：
 
 ``` typescript
         client => {
@@ -181,18 +169,15 @@ This will call the function we've passed in parameter so:
         }
 ```
 
-This sets the client on the loggerServer, in this case this is used to
-send notifications to the frontend about a log level change.
-
-And it returns the loggerServer as the object that will be exposed over JSON-RPC.
+这设置了与 loggerServer 对应的客户端，它被用于向前台发送关于日志级别变化的通知，并将 loggerServer 作为对象返回，该对象将通过 JSON-RPC 公开。
 
 ``` typescript
  factory.listen(connection);
 ```
 
-This connects the factory to the connection.
+这将工厂连接起来。
 
-The endpoints with `services/*` path are served by the webpack dev server, see `webpack.config.js`:
+带有 `services/*` 路径的终端由 webpack dev server 提供，见 `webpack.config.js`：
 
 ``` javascript
     '/services/*': {
@@ -261,9 +246,9 @@ Here we're getting the websocket connection, this will be used to create a proxy
         return connection.createProxy<ILoggerServer>("/services/logger", loggerWatcher.getLoggerClient());
 ```
 
-As the second argument, we pass a local object to handle JSON-RPC messages from the remote object.
-Sometimes the local object depends on the proxy and cannot be instantiated before the proxy is instantiated.
-In such cases, the proxy interface should implement `JsonRpcServer` and the local object should be provided as a client.
+作为第二个参数，我们传递一个本地对象来处理来自远端的 JSON-RPC 消息。
+
+有时本地对象依赖代理，并且不能在代理实例化之前实例化，在这种情况下，代理接口应该实现 `JsonRpcServer`，本地对象应该作为客户端。
 
 ```ts
 export type JsonRpcServer<Client> = Disposable & {
@@ -306,29 +291,29 @@ So again there's multiple things going on here what this does is that:
 So now instances of ILoggerServer are proxied over JSON-RPC to the
 backend's LoggerServer object.
 
-## Loading the modules in the example backend and frontend
+## 加载案例的前后端模块
 
-So now that we have these modules we need to wire them into the example.
-We will use the browser example for this, note that it's the same code for
-the electron example.
+现在我们有了这些模块，需要把它们连接到案例中。
 
-### Backend
+我们将使用浏览器的场景来做演示，注意，这和 Electron 场景下的代码是一样的。
 
-In examples/browser/src/backend/main.ts you will need something like:
+### 后端
+
+在 examples/browser/src/backend/main.ts 中需要：
 
 ``` typescript
 import { loggerServerModule } from 'theia-core/lib/application/node/logger-server-module';
 ```
 
-And than load that into the main container:
+并且加载到 main container 之中：
 
 ``` typescript
 container.load(loggerServerModule);
 ```
 
-### Frontend
+### 前端
 
-In examples/browser/src/frontend/main.ts you will need something like:
+在 examples/browser/src/frontend/main.ts 中需要：
 
 ``` typescript
 import { loggerFrontendModule } from 'theia-core/lib/application/browser/logger-frontend-module';
@@ -338,8 +323,6 @@ import { loggerFrontendModule } from 'theia-core/lib/application/browser/logger-
 container.load(frontendLanguagesModule);
 ```
 
-## Complete example
+## 完整案例
 
-If you wish to see the complete implementation of what I referred too in
-this documentation see [this commit](https://github.com/eclipse-theia/theia/commit/99d191f19bd2a3e93098470ca1bb7b320ab344a1).
-
+如果想看本文档中提到的完整实现，[请看这个 commit](https://github.com/eclipse-theia/theia/commit/99d191f19bd2a3e93098470ca1bb7b320ab344a1)。

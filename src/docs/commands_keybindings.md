@@ -4,7 +4,7 @@ title: Commands/Menus/Keybindings
 
 # 命令、菜单以及快捷键
 
-命令由 ID 和对应的执行函数定义（以及一些可选参数，如名称或图标）。命令可以通过命令面板触发，它们可以绑定到键绑定或菜单项，并且可以通过程序调用。命令触发的动作是与执行环境紧密相连的，因此它们只能在特定条件下调用（如：窗口被选中、当前项被选择等）。
+命令由 ID 和对应的执行函数组成（以及一些可选参数，如名称或图标）。命令可以通过命令面板触发，它们可以绑定到键绑定或菜单项，并且可以通过程序调用。命令触发的动作是与执行环境紧密相连的，因此它们只能在特定条件下调用（如：窗口被选中、当前项被选择等）。
 
 以下部分介绍如何提供命令、快捷键绑定和菜单项的详细信息，将描述如何使用不同的贡献点以及如何使用相应的服务来管理这些选项。
 
@@ -50,7 +50,7 @@ export class HelloworldCommandContribution implements CommandContribution {
 
 ### 绑定到 CommandContribution 贡献点
 
-为了让我们的 `CommandContribution` 能够被 Theia 访问，我们需要将自定义的 `HelloworldCommandContribution` 与对应的贡献点标识符 `CommandContribution` 绑定。这是在 `helloworld-frontend-module` 中实现的，更多细节见 [Services and Contributions]（https://theia-ide.org/docs/services_and_contributions/）。
+为了让我们的 `CommandContribution` 能够被 Theia 访问，我们需要将自定义的 `HelloworldCommandContribution` 与对应的贡献点标识符 `CommandContribution` 绑定。这是在 `helloworld-frontend-module` 中实现的，更多细节见 [Services and Contributions](https://theia-ide.org/docs/services_and_contributions/)。
 
 **helloworld-frontend-module.ts**
 ```typescript
@@ -61,7 +61,7 @@ export default new ContainerModule(bind => {
 });
 ```
 
-上述用来注册命令的 `CommandRegistry` 也提供了与命令交互的 API。例如，你可以用代码方式执行命令，可以浏览所有注册的命令，可以访问最近执行的命令列表。更多细节请参考[TypeDoc for the CommandRegistry]（https://eclipse-theia.github.io/theia/docs/next/classes/core.commandregistry-1.html）。要在贡献点之外使用`CommandRegistry`，你可以通过依赖注入来访问它。
+上述用来注册命令的 `CommandRegistry` 也提供了与命令交互的 API。例如，你可以用代码方式执行命令，可以浏览所有注册的命令，可以访问最近执行的命令列表。更多细节请参考[TypeDoc for the CommandRegistry](https://eclipse-theia.github.io/theia/docs/next/classes/core.commandregistry-1.html)。要在贡献点之外使用 `CommandRegistry`，你可以通过依赖注入来访问它。
 
 在下面的章节中，我们将阐述如何将命令与菜单项、快捷键绑定。
 

@@ -4,7 +4,7 @@ title: Authoring an Extension
 
 # 开发 Theia 扩展
 
-作为示例，我们将添加一个 Say hello 的菜单项，它会显示通知 “Hello world！”。 本文将告诉你完成所有的必要步骤。
+作为演示，我们将创建一个 Say hello 的菜单项，用来展示提示信息 “Hello world！”，本文将讲解所有步骤。
 
 ## Theia 的架构
 

@@ -2,23 +2,23 @@
 title: Label Provider
 ---
 
-# Label Provider
+# 标签提供者
 
-A label provider in Eclipse Theia is responsible for the way elements/nodes are presented in the UI. The label provider determines the icon and the text for elements displayed in trees, lists or other locations such as view headers. A good example is the file explorer: file and directory nodes retrieve their icon and text from the label provider. Another example for the usage of a label provider is the header of an open editor. Please also see the [LabelProvider TypeDoc](https://eclipse-theia.github.io/theia/docs/next/classes/core.labelprovider-1.html).
+Theia 中的标签提供者负责元素/节点在用户界面中的显示方式。标签提供者决定显示在树、列表或其他位置（如视图标题）的元素图标和文本。一个很好的案例是文件资源管理器：文件和目录节点从标签提供者那里获取它们的图标和文本。另一个使用标签提供者的案例是编辑器的页眉。请看 [LabelProvider TypeDoc](https://eclipse-theia.github.io/theia/docs/next/classes/core.labelprovider-1.html)。
 
-The default label provider in Theia browses registered label provider contributions to determine the best fitting one for an element/node. The label provider will delegate the calls for a specific node to the contribution which can best handle the element. Eclipse Theia provides default label provider contributions for common types, e.g. for files. By providing your own label provider contributions, you can extend or adapt the look of specific nodes, based on specific criteria.
+Theia 的默认标签提供者会先检索已注册的标签提供者，以确定最适合的元素/节点标签。标签提供者会将特定节点的调用委托给能够最好地处理该元素的贡献。Theia 为常见的类型提供了默认贡献，例如：文件类型。通过自己的贡献，可以根据特定的标准来扩展或调整节点的外观。
 
-In this article we will describe how to customize the label and icon of a custom file type (.my) in Eclipse Theia, as  seen in the screenshot below. 
+本篇，我们将介绍如何在 Theia 中定制自定义文件类型（.my）的标签和图标，如下图所示：
 
 <img src="/custom-label-provider.png" alt="A custom label provider" style="max-width: 525px">
 
-If you are not yet familiar with contribution points in Theia or the use of dependency injection, please consider this guide on [Services and Contributions](https://theia-ide.org/docs/services_and_contributions/).
+如果你还不熟悉 Theia 的贡献点或依赖注入的使用，请参考 [服务和贡献](https://theia-ide.org/docs/services_and_contributions/)指南。
 
-All the following code examples are from the [Theia extension generator](https://github.com/eclipse-theia/generator-theia-extension). You can get the same code set-up by installing the generator, selecting the “Label Provider” example (see [here](https://github.com/eclipse-theia/generator-theia-extension)) and choosing “labelProvider” as the name.
+下面所有的代码都来自 [Theia 扩展生成器](https://github.com/eclipse-theia/generator-theia-extension)。可以通过安装生成器，选择 "标签提供者" 的例子（[见这里](https://github.com/eclipse-theia/generator-theia-extension)）并选择 "labelProvider" 作为名称来获得同样的代码。
 
-## Contributing a Label Provider
+## 贡献一个标签提供者
 
-To contribute a custom label provider contribution you provide a `LabelProviderContribution`, i.e. a class implementing this interface. In this example, instead of directly implementing the interface, we extend the default implementation for files: `FileTreeLabelProvider`. This allows us to only override the behavior we want to customize.
+要贡献自定义的标签提供者，你需要提供一个 `LabelProviderContribution`，即一个实现该接口的类。在这个例子中，我们没有直接实现这个接口，而是扩展了文件 `FileTreeLabelProvider` 的默认实现，这允许我们只重写我们想要重写的行为。
 
 **labelprovider-contribution.ts**
 ```typescript
@@ -26,9 +26,9 @@ To contribute a custom label provider contribution you provide a `LabelProviderC
 export class LabelproviderLabelProviderContribution extends FileTreeLabelProvider
 ```
 
-The function `canHandle` determines whether the label provider contribution is responsible for a specific node (in our example for ".my" files). Therefore it can check any condition on the respective file, e.g. the file extension. The return value of the function is an integer representing the priority of the label provider contribution, the label provider contribution with the highest priority will be used by the label provider. This way, you can override the default label provider contributions on custom files by returning a higher priority.
+函数 `canHandle` 决定了标签提供者是否为特定的节点（在我们的例子中为".my"文件），它可以检测文件的所有状态，比如：扩展名。该函数的返回值是一个代表标签提供者贡献的优先级的整数，具有最高优先级的将被使用，因此你可以通过返回更高的优先级来覆盖自定义文件上的默认标签提供者贡献。
 
-The `canHandle` function receives an object representing the file handed in as a parameter (for the file tree a `FileStatNode`). Please see an example implementation for canHandle below, which will register a label provider contribution for the file extension “.my”:
+`canHandle` 函数接收一个文件对象作为参数（对于文件树来说是 `FileStatNode`）。请看下面 canHandle 的实现例子，它将为文件扩展名".my"注册一个标签提供者贡献。
 
 **labelprovider-contribution.ts**
 ```typescript
@@ -43,7 +43,7 @@ canHandle(element: object): number {
 }
 ```
 
-Once the label provider contribution is registered for your custom file extension, you can optionally implement `getName`, `getIcon` and `getLongName`. These receive a URI as a parameter and return a custom icon and a custom name for the respective file. Icon and name are used in the file view of Theia. The long name (not customized in the example) is shown as a tooltip when you hover over the file in an opened editor tab. For more details, see the [`LabelProviderContribution` TypeDoc](https://eclipse-theia.github.io/theia/docs/next/interfaces/core.labelprovidercontribution-1.html)
+标签提供者注册自定义文件扩展名时，可以选择实现 `getName`、`getIcon`和`getLongName`，这些功能接收 URI 作为参数，并返回相应文件的自定义图标和名称。图标和名称在 Theia 的文件视图中使用，在编辑器打开的文件中，当悬停在文件上时，文件全名（在本例中没有定制）将作为 tooltip 显示。更多细节，请参见[`LabelProviderContribution` TypeDoc](https://eclipse-theia.github.io/theia/docs/next/interfaces/core.labelprovidercontribution-1.html)
 
 **labelprovider-contribution.ts**
 ```typescript
@@ -56,7 +56,7 @@ getName(fileStatNode: FileStatNode): string {
 }
 ```
 
-To make our `LabelProviderContribution` accessible to Theia, we need to bind the custom `LabelProviderLabelProviderContribution` to the respective contribution symbol `LabelProviderContribution`. This is done in the `labelprovider-frontend-module`, for more details see [Services and Contributions](https://theia-ide.org/docs/services_and_contributions/).
+为了使我们的 `LabelProviderContribution` 能够被 Theia 访问，我们需要将自定义的 `LabelProviderLabelProviderContribution` 与各自的贡献符号 `LabelProviderContribution` 绑定。这是在 `Labelprovider-frontend-module` 中完成的，更多细节见[服务和贡献](https://theia-ide.org/docs/services_and_contributions/)。
 
 **labelprovider-frontend-module.ts**
 ```typescript
@@ -66,9 +66,9 @@ export default new ContainerModule(bind => {
 });
 ```
 
-## Adding a custom icon via CSS
+## 通过 CSS 设定自定义图标
 
-The `getIcon` function returns a CSS string identifying an icon for the custom file type. In the example above, we use a Font Awesome icon. If you want to use a custom icon, you need to add this icon to the CSS as well. Usually, there will be multiple versions of an icon depending on the style (dark vs. light). The following example shows how to add a custom icon. To use this in the example, replace the returned string in `getIcon` above with ‘my-icon’
+`getIcon` 函数返回 CSS 字符串，用于识别自定义文件类型的图标。在上面的例子中，我们使用了 Font Awesome 图标，如果你想用自定义图标，需要在 CSS 中进行设置。通常情况下，图标会有多个版本，这取决于当前风格（深色或浅色）。下面的例子演示如何添加一个自定义图标，要用这个例子，请将上面的 `getIcon` 中返回的字符串替换为 'my-icon'。
 
 **example.css**
 ```css

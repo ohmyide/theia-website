@@ -108,11 +108,11 @@ protected displayMessage(): void {
 
 ### 实现一个 Widget 工厂
 
-Widgets in Theia are instantiated and managed by a central service, the `WidgetManager`. This allows the application to keep track of all created widgets. As an example, the `WidgetManager` supports the function `getOrCreate`, which will either return an existing widget, if it was already created, or create a new one if not.
+Theia中的 Widget 由中央服务 `WidgetManager` 来实例化和管理。这使得应用可以持续管控所有创建的 widget。例如，`WidgetManager`支持 `getOrCreate` 函数，如果已经创建，它将返回一个现有的 widget，如果没有，则创建一个新。
 
-To make a custom widget instantiatable by the widget manager, you need to register a `WidgetFactory`. A widget factory consists of an ID and a function that creates the actual widget. The widget manager will collect all contributed widget factories and pick the correct one for a respective widget by ID.
+为了使一个自定义的 widget 可以被 widget 管理器实例化，你需要注册 `WidgetFactory`。一个 widget 工厂由 ID 和创建 widget 的函数组成，widget 管理器将收集所有贡献的widget 工厂，并根据 ID 匹配各自的 widget。
 
-In our example (see code below), we first bind our widget `MyWidget` to itself so that we can instantiate it in our factory using dependency injection. This is not necessarily required for all widgets if they do not use dependency injection inside. We are using dependency injection in our example above to retrieve the message service and for the @postConstruct event. Second, we bind a `WidgetFactory` defining the ID of the widget and the `createWidget` function. This function allows you to control the widget creation, e.g. to pass specific parameters to a custom widget if required. In our simple example, we just use the dependency injection context to instantiate our widget.
+在我们的例子中（见下面的代码），首先将 `MyWidget` 绑定到自己身上，这样就可以用依赖注入在我们的工厂中将它实例化，如果所有的 widget 内部没用依赖注入的话，则无需要这样做。我们在上面的例子中使用依赖注入来检索消息服务和 @postConstruct 事件。其次，我们绑定一个 `WidgetFactory`，定义 widget 的 ID 和 `createWidget` 函数。这个函数允许你控制 widget 的创建，例如，如果需要的话，可以将特定的参数传递给自定义 widget。在我们的简单例子中，我们只是使用依赖性注入上下文来实例化我们的 widget。
 
 **mywidget-frontend-module.ts**
 ```typescript
@@ -123,17 +123,18 @@ bind(WidgetFactory).toDynamicValue(ctx => ({
 })).inSingletonScope();
 ```
 
-Now you could already open a widget manually via using the widget manager API. However, for most use cases, you want to add a view to the view menu and also provide a respective command. This can be conveniently done using a widget contribution as described in the next section.
+现在你可以通过 widget manager API 打开 widget。然而，大多数情况下，你需要在视图菜单中创建一个选项，并提供一个相应的命令。这可以通过使用 widget 扩展点来方便地完成，如下一节所述。
 
-### Widget Contribution
+### Widget 扩展
 
-Widget contributions allow you to wire a widget into the Theia workbench, more precisely to add them to the view menu and the quick command bar. Theia provides a convenient base class `AbstractViewContribution` to inherit from, which already implements the most common feature set (see example code below). For the initialization, you only need to specify the following parameters:
+widget 扩展允许你将 widget 接入 Theia 工作台，更确切地说，是将它们添加到视图菜单和快捷命令中。Theia提供了一个方便的基类 `AbstractViewContribution` 来继承，它已经实现了最常见的功能集（见下面的示例代码）。只需要指定以下参数即可初始化：
 
-* `widgetID`: The ID of the widget, used to open it via the widget manager
-* `widgetName`: The name which is displayed in the view menu. Usually the same name as used for the widget tab.
-* `defaultWidgetOptions`: Option to influence where the widget will be displayed on opening, e.g. in the left area of the workbench. See [the typedoc](https://eclipse-theia.github.io/theia/docs/next/interfaces/core.applicationshell-2.widgetoptions.html) for more information.
-* `toggleCommandId`: The command that opens the view. You can use the pre implemented `openView` function provided by the super class.
-Besides specifying these base parameters, you need to register the command to open the view. The base class implements the respective command contribution interface, so you just need to implement `registerCommands` to do so (see below).
+* `widgetID`: widget 的 ID，用于通过 widget 管理器打开它。
+* `widgetName`: 显示在视图菜单中的名称，通常与 widget 标签使用的名称相同。
+* `defaultWidgetOptions`: 影响 widget 打开时的位置选项，例如：在工作台面的左边区域。更多信息见[the typedoc](https://eclipse-theia.github.io/theia/docs/next/interfaces/core.applicationshell-2.widgetoptions.html)。
+* `toggleCommandId`: 打开视图的命令，你可以使用超类提供的预实现函数：`openView`。
+除了指定的基本参数，你还需要注册打开视图的命令。基类实现了相应的命令贡献接口，所以你只需要实现 `registerCommands` 就可以了（见下文）。
+
 
 **mywidget-contribution.ts**
 ```typescript
@@ -156,4 +157,4 @@ export class MyWidgetContribution extends AbstractViewContribution<MyWidget> {
 }
 ```
 
-With the contribution above, the view will now be shown in the standard “view” menu of Theia and you can also use the respective “open view” command to open it.
+有了上面的扩展，该视图将出现在 Theia 的标准"视图"菜单中，也可使用对应的"打开视图"命令将它打开。

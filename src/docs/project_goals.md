@@ -2,48 +2,49 @@
 title: Project Goals
 ---
 
-# Strategic Goals of Eclipse Theia
+# Eclipse Theia 的战略目标
 
-This section describes the overall goals of the Eclipse Theia project.
+本节介绍 Theia 项目的总体目标。
 
-**Eclipse Theia mission statement: A framework for building tools and IDEs based on web technologies.**
 
-## An Open, Flexible and Extensible Tool Platform
+**Eclipse Theia 的使命：一个基于 Web 技术，用于构建工具和 IDE 的框架**
 
-The goal of the Eclipse Theia project is to provide a platform for efficiently developing tools and IDEs based on a modern web technology stack. The primary target group for Theia is developers implementing a custom tool for end users. As Theia-based products are typically customized, branded and labeled by its adopters, the actual end users may not even be aware of the Theia project they are using under the hood. Therefore, end users are only an indirect secondary target group of Theia. 
+## 一个开源、灵活、可扩展的工具平台
 
-## Desktop & Browser, Local & Remote (Cloud)
+Theia 项目的目标是提供基于现代 Web 技术，用于构建工具和 IDE 的平台。Theia 的目标群体是为终端用户实现定制工具的开发人员。由于基于 Theia 的产品通常是由开发者定制、创建品牌和标签的，最终用户甚至感知不到 Theia 的存在。因此，用户是 Theia 的间接目标群体。
 
-Tools and IDEs built on Theia can run as desktop applications or in the browser. The backend of Theia can run locally (for the desktop case) or as a remote service in the cloud. Both variants currently have an equal priority.
+## 桌面和浏览器，本地和云端
 
-## Platform for IDEs and Tools
+基于 Theia 的工具和 IDE 可以在本地桌面或浏览器中运行。Theia 的后端可以在本地运行（针对桌面情况）或作为云端的远程服务。这两个方向目前优先级一样。
 
-Theia is targeted at building a variety of custom tools. Prominent examples of Theia-based products include IDE's, but Theia also explicitly targets tools that do not focus on textual input/editors or software development. Thus, Theia's scope also included diagram editors or form-based UI. The Theia platform hence covers the typical application scenarios of the Eclipse rich-client platform (Eclipse RCP). As a consequence, the platform aims at making as few assumptions as possible about what adopters might want to build with Theia. It explicitly allows deviation from the standard workbench layout and the removal of all default features.
+## IDE 和工具的搭建平台
 
-## Basic Workbench Frame
+Theia 的目标是搭建各种定制工具，基于 Theia 的产品例子包括各种 IDE，但 Theia 也明确针对那些不专注于文本输入、编辑器或软件开发的工具。因此，Theia 的能力范围也包括图表编辑器或基于表单的用户操作界面。Theia 平台因此涵盖了 Eclipse 多功能客户端平台（Eclipse RCP）的典型应用场景。因此，该平台尽可能少地限制开发者用 Theia 构建任意产品。它允许偏离常规工作台布局和删除所有的默认功能。
 
-Theia provides a workbench frame, i.e., a window management system permitting the display of views, editors, and menus and makes available tools and interactions allowing the user to modify of the window layout, trigger commands, and use key bindings and other concepts known from a desktop tool such as drag and drop.
+## 基本工作台框架
 
-## Reusable Common Tool Features
+Theia 提供了一个工作台框架，即一个允许显示视图、编辑器和菜单的窗口管理系统，并提供可用的工具和交互，允许用户修改窗口布局、触发命令、快捷键绑定和其他已知的桌面工具能力，如：拖拽。
 
-Theia optionally provides common tool features as components to be reused by adopters. Common features are generic so that may be reused in several tools. Examples for these common tool features include a file explorer, Git support and a code editor.
+## 可复用的通用工具功能
 
-## Extensibility and Adaptability
+Theia 可选择提供通用工具功能作为组件，供采用者重复使用。通用功能可在多个工具中重复使用。这些通用工具功能的例子包括：文件资源管理器、Git支持、和代码编辑器。
 
-Theia is an extensible and adaptable framework. Extensibility in this context means that you can easily add new features to a product built on the Theia platform (including UI and backend functionality). These new features can either be provided by the Theia project itself (common features), by other projects (e.g. Eclipse GLSP) or be custom features that are developed by an adopter. Adaptable in this context means that the workbench and all common features that are provided by the Theia project can be customized and adapted to project-specific needs. This includes changing or removing existing features and adjusting the look and feel.
+## 可扩展和可适配
 
-## VS Code Compatibility
+Theia 是一个可扩展、可适配的框架，这里的可扩展性指你可以很容易地在基于 Theia 的产品中添加新的功能（包括 UI 和后台功能）。新功能既可由 Theia 项目本身提供（通用功能），也可以由其他项目提供（例如 Eclipse GLSP），或者是由采用者开发的自定义功能。这里的可适配是指工作台和 Theia 项目提供的所有通用功能可以被定制并选配到项目的具体需求。这包括改变或删除现有的功能以及调整外部视觉效果。
 
-Theia provides the ability to host VS Code extensions. This allows adopters to benefit from features that are provided as VS Code extensions and make them part of their tool offering. It also allows end users of Theia-based tools to install additional features, if the adopter providing a tool allows users to do so. When applicable, the default Theia UX aligns with the VS Code UI, although adopters can deviate from this.
+## 兼容 VS Code
 
-## Use Standards And Don’t Reinvent The Wheel
+Theia 提供了托管 VS Code 扩展的能力。这允许采用者复用 VS Code 扩展，并使其成为工具的一部分。如果开发者允许，最终用户还可以安装额外的功能，且 Theia 的默认用户体验与 VS Code 的用户界面一致，且开发者可以进一步定制。
 
-Theia uses/reuses industrial standard technologies and practices whenever applicable. This keeps the scope of the project minimal and decreases the maintenance cost. This applies to the use of frameworks and development tools as well as to general concepts such as UX.
+## 使用标准，不重复造轮子
 
-## Product Templates
+Theia 大量使用和实践业界标准，这使项目更加聚焦，并减少了维护成本。这包括框架和开发工具的技术，也包括一些默认概念，如：用户体验。
 
-The Eclipse Theia project does not primarily aim to provide products for end users but focuses on offering a platform for building products. However, the project provides product templates, a.k.a. “Blueprints”. These blueprints serve two purposes. First, they allow adopters to consume example Theia-based products from the view point of an end user, which enables them to evaluate the underlying platform without first creating a product based on it. Second, the blueprints serve as templates to create custom products. Therefore, the template products contain documentation on how to customize them.
+## 产品样例
 
-## Open and Vendor Neutral Governance
+Theia 主要目的不是为终端用户提供产品，而是专注于为构建产品提供平台。为此，该项目提供了产品样例，又称 "蓝图"。蓝图有两个目的，首先，它们允许采用者从终端用户的角度来使用基于 Theia 的产品范例，这让他们便于评估技术选型，而不需要先在其基础上创建产品。其次，蓝图可以作为模板来创建自定义产品。因此，样例产品包含了如何定制产品的文档。
 
-Eclipse Theia is an open and vendor-neutral project with a diverse community of contributors from large corporations down to small companies and even individual developers. This diverse and steadily growing community is a stable base for the ongoing development of additional features and maintenance of existing functionality based on a broad and balanced view of the requirements put forward by the Theia adopters. The commercial-friendly licensing and the rigorous underlying IP management ensures that adopters can safely build commercial and internal products based on Theia. Project communication is open and transparent and welcomes new adopters by keeping the barriers of contribution as low as possible. Decisions in the project are based on the principle of meritocracy meaning that the weight of contributors in decisions is solely based on their achievements for the project as recognized by their peers. This provides an important incentive for contributors to make contributions. The open governance and diverse community of Theia is one of its strongest assets for its mid- to long-term evolution and viability.
+## 开源且厂商中立的管理模式
+
+Theia 是一个开源、厂商中立的项目，拥有由大公司到小公司甚至是个人开发者组成的多样化社区。多样化且持续活跃的社区是其稳定的基础，可以根据 Theia 采用者提出的广泛而合理的需求，持续开发新功能，以及维护现有功能。商业友好的许可和严格的基础知识产权管理确保采用者可以安全地建立基于 Theia 的商业产品或内部产品。项目交流是公开透明的，通过尽可能低的贡献门槛来欢迎新的采用者。项目的决策是基于任人唯贤的原则，这意味着贡献者在决策中的权重完全基于他们在项目中的成就，并得到同行的认可。这为贡献者提供了有效激励机制，促进让他们做出贡献。Theia 的开放式管理和多样化社区是其长期发展和生存能力的最强大资产之一。

@@ -57,24 +57,24 @@ export const MENU = [
         'authoring_extensions'
     ),
     M(
-        'Authoring Plug-ins',
+        '开发插件',
         'authoring_plugins'
     ),
     M(
-        'Adding Language Support',
+        '添加语言支持',
         'language_support'
     ),
     M(
-        'TextMate Coloring',
+        'TextMate 高亮',
         'textmate',
         null,
         true
     ),
     {
-        title: 'Concepts APIs'
+        title: '核心 API'
     },
     M(
-        'Commands/Menus/Keybindings',
+        '命令/菜单/快捷键',
         'commands_keybindings'
     ),
     M(
@@ -82,58 +82,58 @@ export const MENU = [
         'widgets'
     ),
     M(
-        'Preferences',
+        '首选项（偏好设置）',
         'preferences'
     ),
     M(
-        'Label Provider',
+        '标签提供者',
         'label_provider'
     ),
     M(
-        'Message Service',
+        '消息服务',
         'message_service'
     ),
     M(
-        'Property View',
+        '属性视图',
         'property_view'
     ),
     M(
-        'Events',
+        '事件',
         'events'
     ),
     M(
-        'Frontend Application Contributions',
+        '前端扩展点',
         'frontend_application_contribution'
     ),
     M(
-        'Backend Application Contributions',
+        '后台扩展点',
         'backend_application_contribution'
     ),
     M(
-        'Communication via JSON-RPC',
+        'JSON-RPC 通信',
         'json_rpc'
     ),
     M(
-        'Tasks',
+        '任务',
         'tasks'
     ),
     M(
-        'Internationalization',
+        '国际化',
         'i18n'
     ),
     M(
-        'Advanced Tips',
+        '高阶技巧',
         'tips'
     ),
     {
         title: 'Theia Blueprint'
     },
     M(
-        'Download',
+        '下载',
         'blueprint_download'
     ),
     M(
-        'Documentation',
+        '必读资料',
         'blueprint_documentation'
     )
 ]

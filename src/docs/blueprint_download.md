@@ -6,17 +6,18 @@ title: Eclipse Theia Blueprint
 
 <img src="/theia-logo-blueprint.png" alt="Theia Logo Blue" style="max-width: 525px">
 
-## What is Eclipse Theia Blueprint?
+## 什么是 Eclipse Theia Blueprint ？
 
-Eclipse Theia Blueprint is a **template** for building desktop-based products based on the Eclipse Theia platform, as well as to showcase Eclipse Theia capabilities. It is made up of a  subset of existing Eclipse Theia features and extensions and can be easily downloaded and installed on all major operating system platforms (see below). Documentation is available to help you customize and build your own Eclipse Theia-based product.
+Eclipse Theia Blueprint 是一个示例模板，用于构建基于 Theia 的桌面产品，同时也用于展示其功能。它是由现有部分 Theia 功能和扩展构建而成，很便利的下载并安装在主流操作系统上（见下文）。以下文档可以帮你定制和构建自己的 Theia 产品。
 
-## What is it not?
 
-Eclipse Theia Blueprint is ***not*** **a production-ready product**. Therefore, it is also not meant to be a replacement for Visual Studio Code or any other IDE.
+## 它不是什么？
 
-## Downloads
+Eclipse Theia Blueprint 不是一个完善的发布产品。这意味着它不是 Visual Studio Code 或任何其他 IDE 的替代品。
 
-<span style="color:red">Warning: Currently Eclipse Theia Blueprint is a **beta** version. Please consider the current versions as experimental. </span>
+## 下载
+
+<span style="color:red">警告：目前 Eclipse Theia Blueprint 是一个 **beta** 版本，可视为一个实验性产品。 </span>
 
 <table cellspacing="25">
   <thead>
@@ -28,26 +29,26 @@ Eclipse Theia Blueprint is ***not*** **a production-ready product**. Therefore, 
   </thead>
   <tbody>
     <tr>
-      <td><a href="https://www.eclipse.org/downloads/download.php?file=/theia/latest/windows/TheiaBlueprint.exe&r=1" download>Download latest</a></td>
-      <td><a href="https://www.eclipse.org/downloads/download.php?file=/theia/latest/linux/TheiaBlueprint.AppImage&r=1" download>Download latest</a></td>
-      <td><a href="https://www.eclipse.org/downloads/download.php?file=/theia/latest/macos/TheiaBlueprint.dmg&r=1" download>Download latest</a></td>
+      <td><a href="https://www.eclipse.org/downloads/download.php?file=/theia/latest/windows/TheiaBlueprint.exe&r=1" download>下载最新</a></td>
+      <td><a href="https://www.eclipse.org/downloads/download.php?file=/theia/latest/linux/TheiaBlueprint.AppImage&r=1" download>下载最新</a></td>
+      <td><a href="https://www.eclipse.org/downloads/download.php?file=/theia/latest/macos/TheiaBlueprint.dmg&r=1" download>下载最新</a></td>
     </tr>
   </tbody>
 </table>
 
-## Reporting Feature Requests and Bugs
+## 反馈需求及 bug
 
-The features found in Eclipse Theia Blueprint are based on Eclipse Theia and the available extensions/plugins. For more details please see the [Eclipse Theia Github Repository](https://github.com/eclipse-theia/theia).
-Eclipse Theia Blueprint only packages existing Eclipse Theia functionality and installers. If you believe there is a mistake in packaging, something needs to be added to the packaging or the installers do not work properly, please [open an issue on Github](https://github.com/eclipse-theia/theia-blueprint/issues/new/choose) to let us know.
+Eclipse Theia Blueprint 中的功能是基于 Theia 和其扩展/插件构建而成。更多细节见 [Eclipse Theia Github Repository](https://github.com/eclipse-theia/theia)。
+Eclipse Theia Blueprint 只打包现有的 Theia 功能和安装程序。如果你发现打包中存在错误、想在打包中添加一些东西，或者安装程序不能正常工作，请[在 Github 上新建 issue](https://github.com/eclipse-theia/theia-blueprint/issues/new/choose)让我们知道。
 
-## Source Code
+## 源码
 
-The source code for Eclipse Theia Blueprint is available on [Github](https://github.com/eclipse-theia/theia-blueprint).
+Eclipse Theia Blueprint 源码见 [Github](https://github.com/eclipse-theia/theia-blueprint).
 
-## Documentation
+## 文档
 
-Please see [here](/docs/blueprint_documentation) for documentation on how to customize Eclipse Theia Blueprint.
+请 [点击这里](/docs/blueprint_documentation) 了解如何定制 Eclipse Theia Blueprint。
 
-## Support
+## 技术支持
 
-Need help with Theia? To get support by the community go to the [Discourse Theia forum](https://community.theia-ide.org/) or the [Discussions at Github](https://github.com/eclipse-theia/theia/discussions). To get professional support for Theia see the [support page](/support/). 
+需要 Theia 相关帮助吗？请到[Discourse Theia论坛](https://community.theia-ide.org/)或[Github的讨论](https://github.com/eclipse-theia/theia/discussions) 获取社区支持。要获得 Theia 的专业支持，请看链接 [技术支持](/support/)。

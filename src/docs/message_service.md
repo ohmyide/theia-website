@@ -2,16 +2,16 @@
 title: Message Service
 ---
 
-# Message Service
+# 消息服务
 
-The message service allows you to show messages, interactive dialogues and progress information to the user. You can get the `MessageService` injected and call either `info`, `warn` or `error` on it to report your message (see code example below):
+消息服务允许你向用户弹出提示消息、对话框和进度信息，你可以获得 `MessageService` 的注入，并调用 `info`、`warn` 或 `error` 来展示消息（见下面的代码例子）。
 
 ```typescript
 @inject(MessageService) private readonly messageService: MessageService
 this.messageService.info('Hello World!')
 ```
 
-By default, Theia will display messages as toast notifications in the bottom right corner. Below you can see screenshots of the different message types (info, warn and error). Please note that you can easily adopt Theia to implement a different behavior for displaying messages by providing a custom `MessageClient`.
+默认情况下，Theia 会在右下角以浮窗的形式显示消息，下面是不同消息类型（info, warn and error）的截图。注意，你可以通过实现自定义的 `MessageClient` 来轻松地控制 Theia 不同行为的消息。
 
 Info
 
@@ -25,15 +25,15 @@ Error
 
 <img src="/message-service-error.png" alt="Message Service - error" style="max-width: 525px">
 
-By default, notifications will be displayed until the user closes them. You can optionally define a time out after which messages will be closed automatically:
+默认情况下，提示会一直展示，直到用户关闭它们，也可以选择定义的时间，超时后消息自动关闭。
 
 ```typescript
 this.messageService.info('Say Hello with timeout',{timeout: 3000})
 ```
 
-Optionally, you can also add actions that the user can execute. In case the user executes an action, the message service call will resolve to the action string which was handed over.
+另外，还可以添加用户可执行的选项操作，如果用户选择了某个操作，执行了一个动作，消息将展示用户所选的操作。
 
-In the following code example, we provide the two actions “Say Hello again!” and “Cancel”. We react to the action “Say hello again!” by posting yet another message, “Cancel” will be ignored.
+在下面的例子中，我们提供了两个动作 “Say Hello again!” 和 “Cancel”，我们对 “Say Hello again!” 这个操作的是发布另一条消息，“Cancel” 则是忽略。
 
 ```typescript
 @inject(MessageService) private readonly messageService: MessageService
@@ -46,17 +46,17 @@ this.messageService
    })
 ```
 
-The corresponding toast notification will look like this:
+警示通知像这样：
 
 <img src="/message-service-user-action.png" alt="Message Service - user action" style="max-width: 525px">
 
-When the user selects “Say Hello again”, another toast notification will be shown:
+当用户选择 “Say Hello again” 时，将显示另一个警示通知：
 
 <img src="/message-service-hello-again.png" alt="Message Service - after user action" style="max-width: 525px">
 
-## Progress Reporting
+## 进度提示
 
-The message service also allows you to report progress on an ongoing operation. You can incrementally update a progress bar and the message while the toast notification remains visible until the operation is done. The following example opens a progress bar and updates the status three times before it is completed. Please see the [TypeDoc of `MessageService`](https://eclipse-theia.github.io/theia/docs/next/classes/core.messageservice-1.html#showprogress) for more detailed information.
+消息服务也允许提示正在进行的操作的进度，你可以逐步更新进度条和消息，并让通知保持可见，直到操作完成。下面的例子打开了一个进度条，并在完成前三次更新状态。更多信息请参考 [TypeDoc of `MessageService`](https://eclipse-theia.github.io/theia/docs/next/classes/core.messageservice-1.html#showprogress)。
 
 ```typescript
 this.messageService
@@ -82,8 +82,7 @@ this.messageService
    progress.cancel();
  })
 ```
- 
-Note that `progress.cancel` is also used to signal that a progress is complete.
-The code example above will be displayed like this:
+
+需注意，`progress.cancel` 也会表示进度任务已经完成，上面的例子运行效果为：
 
 <img src="/message-service-progress-reporting.gif" alt="Message Service - progress reporting" style="max-width: 525px">
